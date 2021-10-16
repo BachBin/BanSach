@@ -26,15 +26,19 @@
 			tk = user.getTendn();
 			mk = user.getMatkhau();
 		}
+		if(request.getAttribute("tknew")!=null && request.getAttribute("mknew")!=null) {
+			tk = (String)request.getAttribute("tknew");
+			mk = (String)request.getAttribute("mknew");
+		}			
 	%>
     <div id="logreg-forms">
-    	<%if(request.getAttribute("error")!=null) {%>
+    	<%if(request.getAttribute("mess")!=null) {%>
     		<div class="alert alert-danger text-justify text-center" role="alert">
-			  	<%=(String)request.getAttribute("error") %>
+			  	<%=(String)request.getAttribute("mess") %>
 			</div>
     	<%} %>
-        <form class="form-signin" method="post" action="user-login">
-            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Đăng nhập</h1>
+        <form class="form-signin" method="post" action="checklogin">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> ĐĂNG NHẬP</h1>
             <div class="social-login">
 	            <a class="btn" href="https://www.facebook.com/v2.12/dialog/oauth?client_id=1292739434493098&redirect_uri=https://localhost:8443/BookName/login-facebook">
 	            	<button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Đăng nhập với Facebook</span> </button>
@@ -44,8 +48,8 @@
 	            </a>            	
             </div>
             <p style="text-align:center"> HOẶC  </p>
-            <input type="text" name="makh" class="form-control" placeholder="Tên tài khoản" required="" autofocus="" value="<%=tk%>">
-            <input type="password" name="matkhau" class="form-control" placeholder="Mật khẩu" required="" value="<%=mk%>">
+            <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" required="" autofocus="" value="<%=(request.getAttribute("tk")!=null)?(String)request.getAttribute("tk"):tk%>">
+            <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required="" value="<%=mk%>">
             
             <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Đăng nhập</button>
             <a href="#" id="forgot_pswd">Quên mật khẩu?</a>

@@ -17,36 +17,49 @@ import Bo.Customerbo;
 @WebServlet("/new-user")
 public class AddUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		try (PrintWriter out = response.getWriter()){
-			String makh = request.getParameter("makhcr");
-			String matkhau = request.getParameter("matkhaucr");
-			String rematkhau = request.getParameter("rematkhaucr");
-			String hoten = request.getParameter("hotencr");
-			String diachi = request.getParameter("diachicr");
-			Customerbo kbo = new Customerbo();
-			if(matkhau.equals(rematkhau)) {				
-					Customerbean n = new Customerbean(0, makh, hoten, diachi, matkhau);
-					kbo.createCustomer(n);
-					request.getSession().setAttribute("authnew", n);		
-					response.sendRedirect("login.jsp");	
+     @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	 	resp.setContentType("text/html;charset=UTF-8");
+    	 	req.setCharacterEncoding("utf-8");
+    	 	resp.setCharacterEncoding("utf-8");
+    	 	
+    	 	String hoten = req.getParameter("hotencr");
+    	 	String diachi = req.getParameter("diachicr");
+    	 	String sdt = req.getParameter("sdtcr");
+    	 	String email = req.getParameter("emailcr");    	 	
+			String tendn = req.getParameter("tendncr");
+			String matkhau= req.getParameter("matkhaucr");
+			String rematkhau = req.getParameter("rematkhaucr");
+			if(!matkhau.equals(rematkhau)) {
+				req.setAttribute("mess", "Kiểm tra lại mật khẩu!");
+				req.setAttribute("hoten", hoten);
+				req.setAttribute("diachi", diachi);
+				req.setAttribute("sdt", sdt);
+				req.setAttribute("email", email);
+				req.setAttribute("tendn", tendn);	
+				req.getRequestDispatcher("register").forward(req, resp);
 			}
 			else {
-				response.setContentType("text/html");
-				PrintWriter pw=response.getWriter();
-				pw.println("<script type=\"text/javascript\">");
-				pw.println("alert('Đăng nhập thất bại.');");
-				pw.println("</script>");
-				RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
-				rd.include(request, response);
-			}	
-			} catch (Exception e) {
-				e.printStackTrace();
-			}			
-		}	
+				Customerbo kbo = new Customerbo();
+				if(kbo.checkExists(tendn)) {
+					req.setAttribute("mess", "Tài khoản đã tồn tại!");					
+					req.setAttribute("hoten", hoten);
+					req.setAttribute("diachi", diachi);
+					req.setAttribute("sdt", sdt);
+					req.setAttribute("email", email);
+					req.setAttribute("mk", matkhau);	
+					req.setAttribute("remk", rematkhau);
+					req.getRequestDispatcher("register").forward(req, resp);
+				}
+				else {
+					if(kbo.createCustomer(new Customerbean(-1, hoten, diachi, sdt, email, tendn, matkhau))) {
+						req.setAttribute("tknew", tendn);
+						req.setAttribute("mknew", matkhau);
+						req.getRequestDispatcher("login").forward(req, resp);
+					}		
+					else resp.sendRedirect("register");
+				}
+			}
+			
+    }	
 }

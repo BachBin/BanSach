@@ -51,9 +51,6 @@
 			
 			
 			ArrayList<Bookbean> dsbook = (ArrayList<Bookbean>)request.getAttribute("dsbook");
-			ArrayList<Categorybean> dscate = (ArrayList<Categorybean>)request.getAttribute("dscate");
-			Bookbean booknew = (Bookbean)request.getAttribute("booknew");
-
 			
 			String tk = request.getParameter("makh");
 			String mk = request.getParameter("matkhau");			
@@ -67,36 +64,9 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
-				<div class="card bg-light mb-3">
-					<div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Loại sách
-					</div>
-					<ul class="list-group category_block">
-						<%for(Categorybean loai: dscate){ %>
-						<li class="list-group-item text-white"><a
-								href="index.jsp?ml=<%=loai.getMaloai()%>"><%=loai.getTenloai()%></a></li>
-						<%} %>
-					</ul>
-				</div>
-				<div class="card bg-light mb-3">
-					<div class="card-header bg-dark text-white text-uppercase">Sách mới cập nhật</div>
-					<div class="card-body">
-						<img class="img-fluid card-img-top" src="<%=booknew.getAnh()%>">
-						<h3>
-							<a href="#" class="card-title"><%=booknew.getTensach()%></a>
-						</h3>
-						<p class="card-text"><i class="fas fa-at"></i> Tác giả: <%=booknew.getTacgia() %></p>
-						<p class="bloc_left_price">
-							<%=NumberFormat.getNumberInstance(Locale.US).format(booknew.getGia())%> VNĐ</p>
-						<div class="col">
-							<a href="javascript:return false;" onclick="addAjax(<%=booknew.getMasach()%>)"
-								class="btn btn-success btn-block closeLink">Thêm giỏ</a>
-						</div>
-					</div>
-				</div>
-			</div>
+			<jsp:include page="includes/Left.jsp" />
 			<div class="col-sm-9">
-				<div class="row">
+				<div id="content" class="row">
 					<%for(Bookbean s: dsbook){ %>
 					<div class="col-12 col-md-6 col-lg-4">
 						<div class="card">
@@ -131,11 +101,7 @@
 
 	<jsp:include page="includes/Footer.jsp"></jsp:include>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$('.closeLink').click(function (e) {
-			e.preventDefault();
-		});
-
+	<script type="text/javascript">		
 		function addAjax(masach) {
 			$.ajax({
 				url: "/BanSach/addAjax",

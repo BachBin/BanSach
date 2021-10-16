@@ -2,53 +2,47 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+
+import com.google.gson.Gson;
 
 import Bean.Customerbean;
 import Bo.Customerbo;
 
 
-@WebServlet("/edit-user")
+@WebServlet("/editUser")
 public class EditUser extends HttpServlet {
-	private static final long serialVersionUID = 1L;    
-   
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		try (PrintWriter out = response.getWriter()){
-			
-			Customerbean usercu = (Customerbean)request.getSession().getAttribute("auth");			
-			try {
-					String id = request.getParameter("makh");
-					String mk = request.getParameter("matkhau");
-					String dc = request.getParameter("diachi");
-					String ht = request.getParameter("hoten");							
-					Customerbo kbo = new Customerbo();
-					Customerbean n = new Customerbean(usercu.getId(), id, ht, dc, mk);
-					if(kbo.updateCustomer(n)) {			
-						kbo.updateCustomer(n);
-						request.getSession().setAttribute("auth",n);
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Cập nhật tài khoản thành công.');");	
-						out.println("location='index.jsp';");
-						out.println("</script>");
-						response.sendRedirect("index.jsp");
-					}
-					else {
-						response.sendRedirect("error.jsp");
-					}	
-					
-			} catch (Exception e) {
-				e.printStackTrace();
-			}			
+	private static final long serialVersionUID = 1L; 
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf-8");		
+		HttpSession session = req.getSession();
+		Customerbean user = (Customerbean)session.getAttribute("auth");		
+		String id = req.getParameter("makh");
+		String mk = req.getParameter("matkhau");		
+		String ht = req.getParameter("hoten");
+		String dc = req.getParameter("diachi");
+		String sdt = req.getParameter("sdt");
+		String email = req.getParameter("email");				
+		if(user.getTendn().equals(id) && user.getMatkhau().equals(mk) && user.getHoten().equals(ht) && user.getDiachi().equals(dc) && user.getSdt().equals(sdt) && user.getEmail().equals(email)) {
+			resp.sendRedirect("home");	
 		}
+		else {
+			Customerbo kbo = new Customerbo();
+			if(kbo.updateCustomer(new Customerbean(user.getId(), ht, dc, sdt, email, id, mk))) {
+				session.setAttribute("auth", new Customerbean(user.getId(), ht, dc, sdt, email, id, mk));
+				req.setAttribute("alert","Cập nhật tài khoản thành công!");
+				req.getRequestDispatcher("home").forward(req, resp);			
+			}
+		} 			
 	}
-
 }

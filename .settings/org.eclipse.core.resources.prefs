@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
-encoding//Controller/Controller/LoginServlet.java=UTF-8
+encoding//Controller/Controller/AddUser.java=UTF-8
+encoding//Controller/Controller/EditUser.java=UTF-8
+encoding//Controller/Controller/LoadCate.java=UTF-8
+encoding//Controller/Controller/LoginControl.java=UTF-8
 encoding//Model/Dao/Bookdao.java=UTF-8
 encoding//Model/Dao/Categorydao.java=UTF-8
+encoding//WebContent/includes/Left.jsp=UTF-8

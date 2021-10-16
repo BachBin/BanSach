@@ -30,7 +30,7 @@ public class Customerdao {
 		return ds;
 	}
 	public boolean createCustomer(Customerbean user) {
-		sql = "insert into Customer(hoten,diachi,sodt,email,tendn,matkhau) values(?,?,?,?,?,?)";
+		sql = "insert into Customer(hoten,diachi,sodt,email,tendn,pass) values(?,?,?,?,?,?)";
 		try {
 			Connection con = new ConnecDataBase().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);

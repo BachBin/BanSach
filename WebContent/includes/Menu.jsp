@@ -16,8 +16,13 @@
 	Customerbean auth = null;
 	if(session.getAttribute("auth")!=null){
 		auth = (Customerbean)session.getAttribute("auth");
-	}
+	}	
 %>
+<% if(request.getAttribute("alert")!=null){%>
+	<script type="text/javascript">
+		alert("<%=request.getAttribute("alert")%>");
+	</script>
+<%} %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a href="home" class="navbar-brand">Book<b>Name</b></a>  		
 		<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -62,7 +67,7 @@
 					</div>
 					
 					<div class="nav-item">
-						<a href="register.jsp" class="btn btn-primary sign-up-btn">Đăng ký</a>						
+						<a href="register" class="btn btn-primary sign-up-btn">Đăng ký</a>						
 					</div>
 				</div>
 		</div>
@@ -77,7 +82,7 @@
 							<%= tem[tem.length-1]%>
 						</a>
 						<div class="dropdown-menu action-form">
-							<form action="edit-user" method="post">
+							<form action="editUser" method="post">
 								<p class="hint-text" style="font-size: 18px;">Thông tin tài khoản</p>
 								<div class="or-seperator"></div>
 								<br>
@@ -99,9 +104,16 @@
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="Địa chỉ"
 										required="required" name="diachi" value="<%=auth.getDiachi()%>">
-								</div>								
-								<input type="submit" class="btn btn-primary btn-block"
-									value="Sửa">
+								</div>	
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Số điện thoại"
+										required="required" name="sdt" value="<%=auth.getSdt()%>">
+								</div>	
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Email"
+										required="required" name="email" value="<%=auth.getEmail()%>">
+								</div>						
+								<input type="submit" class="btn btn-primary btn-block" value="Cập nhật thông tin">
 							</form>
 							<br>
 							<form action="log-out" method="get" >							
@@ -114,3 +126,4 @@
 			<%} %>	    
 	        
 	</nav>
+	
