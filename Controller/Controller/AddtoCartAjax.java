@@ -34,7 +34,7 @@ public class AddtoCartAjax extends HttpServlet {
     	if(session.getAttribute("order")==null) {
     		gh = new GioHangbo();
     		Bookbo sbo = new Bookbo();
-    		Bookbean book = sbo.getBookbyID(ms);
+    		Bookbean book = sbo.getBookbyMaSach(ms);
     		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
     		session.setAttribute("order", gh);
     		data = new Gson().toJson(gh.Size());
@@ -43,7 +43,7 @@ public class AddtoCartAjax extends HttpServlet {
     	else {
     		gh = (GioHangbo) session.getAttribute("order");
     		Bookbo sbo = new Bookbo();
-    		Bookbean book = sbo.getBookbyID(ms);
+    		Bookbean book = sbo.getBookbyMaSach(ms);
     		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
     		session.setAttribute("order", gh);
     		data = new Gson().toJson(gh.Size());

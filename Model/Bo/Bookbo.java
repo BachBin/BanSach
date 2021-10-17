@@ -37,14 +37,7 @@ public class Bookbo {
 				return e;
 		}
 		return null;
-	}
-	public Bookbean getBookbyID(String ms) {
-		for(Bookbean e:getsach()) {
-			if(e.getMasach().equals(ms))
-				return e;
-		}
-		return null;
-	}
+	}	
 	public Bookbean sachNew() {
 		return sdao.getNew();
 	}	

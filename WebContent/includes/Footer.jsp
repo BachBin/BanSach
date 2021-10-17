@@ -7,7 +7,8 @@
                 <h5>About</h5>
                 <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <p class="mb-0">
-                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant
+                    impression.
                 </p>
             </div>
 
@@ -46,7 +47,7 @@
             <div class="col-12 copyright mt-3">
                 <p class="float-left">
                     <a href="#">Back to top</a>
-                </p>              
+                </p>
             </div>
         </div>
     </div>

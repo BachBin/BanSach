@@ -1,8 +1,11 @@
 @charset "ISO-8859-1";
-.table tbody td{
-vertical-align: middle;
+
+.table tbody td {
+    vertical-align: middle;
 }
-.btn-incre, .btn-decre{
-box-shadow: none;
-font-size: 25px;
+
+.btn-incre,
+.btn-decre {
+    box-shadow: none;
+    font-size: 25px;
 }

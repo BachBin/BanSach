@@ -18,7 +18,6 @@
 <html>
 
 <head>
-	<meta charset="ISO-8859-1">
 	<title>BookShop</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,19 +37,17 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/alert.css" rel="stylesheet" type="text/css" />
+	<script src="js/alert.js"></script>
 </head>
 
 <body>
 
 	<%
-	      //Lay ve all sach, cac thong tin client
-			request.setCharacterEncoding("utf-8");
-			response.setCharacterEncoding("utf-8");
+	     ArrayList<Bookbean> dsbook = (ArrayList<Bookbean>)request.getAttribute("dsbook");
 			
-						
-			
-			
-			ArrayList<Bookbean> dsbook = (ArrayList<Bookbean>)request.getAttribute("dsbook");
+			if(request.getAttribute("dsbooktk")!=null) 
+				dsbook = (ArrayList<Bookbean>)request.getAttribute("dsbooktk");
 			
 			String tk = request.getParameter("makh");
 			String mk = request.getParameter("matkhau");			
@@ -59,7 +56,7 @@
 			
 			
 		%>
-
+	<div id="toast"></div>
 	<jsp:include page="includes/Menu.jsp" />
 
 	<div class="container">
@@ -73,7 +70,8 @@
 							<img class="card-img-top" style="height: 200px" src="<%=s.getAnh()%>" alt="Chưa có ảnh">
 							<div class="card-body">
 								<h4 class="card-title show_txt">
-									<a href="#" title="View Product"><%=s.getTensach()%></a>
+									<a href="detail?bookid=<%=s.getMasach() %>"
+										title="View Product"><%=s.getTensach()%></a>
 								</h4>
 								<p class="card-text show_txt"><i class="fas fa-at"></i> Tác giả: <%=s.getTacgia() %></p>
 								<div class="row">
@@ -87,7 +85,8 @@
 									</div>
 									<div class="col">
 										<a href="javascript:return false;" onclick="addAjax(<%=s.getMasach() %>)"
-											class="btn btn-success btn-block">Thêm giỏ</a>
+											class="btn btn-success btn-block"><i class="fas fa-cart-plus"></i> Thêm
+											giỏ</a>
 									</div>
 								</div>
 							</div>
@@ -98,10 +97,28 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="backtop">
+		<i class="fas fa-chevron-up"></i>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(window).scroll(function () {
+				if ($(this).scrollTop()) {
+					$('#backtop').fadeIn();
+				} else {
+					$('#backtop').fadeOut();
+				}
+			});
+			$('#backtop').click(function () {
+				$('html, body').animate({
+					scrollTop: 0
+				}, 500);
+			});
+		});
+	</script>
 	<jsp:include page="includes/Footer.jsp"></jsp:include>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript">		
+	<script type="text/javascript">
 		function addAjax(masach) {
 			$.ajax({
 				url: "/BanSach/addAjax",
@@ -112,10 +129,29 @@
 				success: function (data) {
 					var sizecart = document.getElementById("cartMenu");
 					sizecart.innerHTML = data;
+					showSuccessToast("Đã thêm sách vào giỏ.");
 				},
 				error: function (xhr) {
 					location.reload();
 				}
+			});
+		}
+
+		function showSuccessToast(mess) {
+			toast({
+				title: "Thành công!",
+				message: mess,
+				type: "success",
+				duration: 5000
+			});
+		}
+
+		function showErrorToast(mess) {
+			toast({
+				title: "Thất bại!",
+				message: mess,
+				type: "error",
+				duration: 5000
 			});
 		}
 	</script>

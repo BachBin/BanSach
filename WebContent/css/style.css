@@ -1,19 +1,24 @@
 @charset "ISO-8859-1";
-* {box-sizing: border-box;}
-*{
+
+* {
+	box-sizing: border-box;
+}
+
+* {
 	margin: 0;
 	padding: 0;
 }
 
 body {
-	font-family: 'Varela Round', sans-serif;	
+	font-family: 'Varela Round', sans-serif;
 }
 
 .form-control {
-	box-shadow: none;		
+	box-shadow: none;
 	font-weight: normal;
 	font-size: 13px;
 }
+
 .navbar {
 	background: #fff;
 	padding-left: 16px;
@@ -21,6 +26,7 @@ body {
 	border-bottom: 1px solid #dfe3e8;
 	border-radius: 0;
 }
+
 .nav-link img {
 	border-radius: 50%;
 	width: 36px;
@@ -29,30 +35,37 @@ body {
 	float: left;
 	margin-right: 10px;
 }
+
 .navbar .navbar-brand {
 	padding-left: 0;
 	font-size: 20px;
 	padding-right: 50px;
 }
+
 .navbar .navbar-brand b {
-	color: #33cabb;		
+	color: #33cabb;
 }
+
 .navbar .form-inline {
 	display: inline-block;
 }
+
 .navbar a {
 	color: #888;
 	font-size: 15px;
 }
+
 .search-box {
 	position: relative;
-}	
+}
+
 .search-box input {
 	padding-right: 35px;
 	border-color: #dfe3e8;
 	border-radius: 4px !important;
 	box-shadow: none
 }
+
 .search-box .input-group-text {
 	min-width: 35px;
 	border: none;
@@ -63,31 +76,37 @@ body {
 	padding: 7px;
 	height: 100%;
 }
+
 .search-box i {
 	color: #a0a5b1;
 	font-size: 19px;
 }
+
 .navbar .sign-up-btn {
 	min-width: 110px;
 	max-height: 36px;
 }
+
 .navbar .dropdown-menu {
 	color: #999;
 	font-weight: normal;
 	border-radius: 1px;
 	border-color: #e5e5e5;
-	box-shadow: 0 2px 8px rgba(0,0,0,.05);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
 }
 
-.navbar a, .navbar a:active {
+.navbar a,
+.navbar a:active {
 	color: #888;
 	padding: 8px 20px;
 	background: transparent;
 	line-height: normal;
 }
+
 .navbar .navbar-form {
 	border: none;
 }
+
 .navbar .action-form {
 	width: 320px;
 	padding: 20px;
@@ -95,26 +114,34 @@ body {
 	right: 0;
 	font-size: 14px;
 }
-.navbar .action-form a {		
+
+.navbar .action-form a {
 	color: #33cabb;
 	padding: 0 !important;
 	font-size: 14px;
 }
+
 .navbar .action-form .hint-text {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 13px;
+	text-align: center;
+	margin-bottom: 10px;
+	font-size: 13px;
 }
-.navbar .btn-primary, .navbar .btn-primary:active {
+
+.navbar .btn-primary,
+.navbar .btn-primary:active {
 	color: #fff;
 	background: #33cabb !important;
 	border: none;
-}	
-.navbar .btn-primary:hover, .navbar .btn-primary:focus {		
+}
+
+.navbar .btn-primary:hover,
+.navbar .btn-primary:focus {
 	color: #fff;
 	background: #31bfb1 !important;
 }
-.navbar .social-btn .btn, .navbar .social-btn .btn:hover {
+
+.navbar .social-btn .btn,
+.navbar .social-btn .btn:hover {
 	color: #fff;
 	margin: 0;
 	padding: 0 !important;
@@ -126,23 +153,28 @@ body {
 	width: 47%;
 	text-decoration: none;
 }
+
 .navbar .social-btn .facebook-btn {
 	background: #507cc0;
 }
+
 .navbar .social-btn .facebook-btn:hover {
 	background: #4676bd;
 }
+
 .navbar .social-btn .btn i {
 	margin-right: 5px;
 	font-size: 16px;
 	position: relative;
 	top: 2px;
 }
+
 .or-seperator {
 	margin-top: 32px;
 	text-align: center;
 	border-top: 1px solid #e0e0e0;
 }
+
 .or-seperator b {
 	color: #666;
 	padding: 0 8px;
@@ -159,105 +191,139 @@ body {
 	top: -15px;
 	z-index: 1;
 }
+
 .navbar .action-buttons .dropdown-toggle::after {
 	display: none;
 }
+
 .form-check-label input {
 	position: relative;
 	top: 1px;
 }
-@media (min-width: 1200px){
+
+@media (min-width: 1200px) {
 	.form-inline .input-group {
 		width: 300px;
 		margin-left: 30px;
 	}
 }
-@media (max-width: 768px){
+
+@media (max-width: 768px) {
 	.navbar .dropdown-menu.action-form {
 		width: 100%;
 		padding: 10px 15px;
 		background: transparent;
 		border: none;
 	}
+
 	.navbar .form-inline {
 		display: block;
 	}
+
 	.navbar .input-group {
 		width: 100%;
 	}
 }
 
 .bloc_left_price {
-    color: #c01508;
-    text-align: center;
-    font-weight: bold;
-    font-size: 150%;
+	color: #c01508;
+	text-align: center;
+	font-weight: bold;
+	font-size: 150%;
 }
-.category_block li:hover {	
-    background-color: #007bff;
+
+.category_block li:hover {
+	background-color: #007bff;
 }
-.category_block li:hover a {	
-    color: #ffffff;
+
+.category_block li:hover a {
+	color: #ffffff;
 }
-a:hover, a:visited, a:link, a:active
-{
-    text-decoration: none;
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+	text-decoration: none;
 }
+
 .category_block li a {
-    color: white;
+	color: black;
 }
-.category_block li a.active{
-    color: white;
+
+.category_block li a.active {
+	color: white;
 }
+
 .add_to_cart_block .price {
-    color: #c01508;
-    text-align: center;
-    font-weight: bold;
-    font-size: 200%;
-    margin-bottom: 0;
+	color: #c01508;
+	text-align: center;
+	font-weight: bold;
+	font-size: 200%;
+	margin-bottom: 0;
 }
+
 .add_to_cart_block .price_discounted {
-    color: #343a40;
-    text-align: center;
-    text-decoration: line-through;
-    font-size: 140%;
+	color: #343a40;
+	text-align: center;
+	text-decoration: line-through;
+	font-size: 140%;
 }
+
 .product_rassurance {
-    padding: 10px;
-    margin-top: 15px;
-    background: #ffffff;
-    border: 1px solid #6c757d;
-    color: #6c757d;
+	padding: 10px;
+	margin-top: 15px;
+	background: #ffffff;
+	border: 1px solid #6c757d;
+	color: #6c757d;
 }
+
 .product_rassurance .list-inline {
-    margin-bottom: 0;
-    text-transform: uppercase;
-    text-align: center;
+	margin-bottom: 0;
+	text-transform: uppercase;
+	text-align: center;
 }
+
 .product_rassurance .list-inline li:hover {
-    color: #343a40;
+	color: #343a40;
 }
+
 .reviews_product .fa-star {
-    color: gold;
+	color: gold;
 }
+
 .pagination {
-    margin-top: 20px;
+	margin-top: 20px;
 }
+
 footer {
-    background: #343a40;
-    padding: 40px;
-    margin-top: 20px;
+	background: #343a40;
+	padding: 40px;
+	margin-top: 20px;
 }
+
 footer a {
-    color: #f8f9fa!important
-}
-.show_txt{
-    display: inline-block;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
+	color: #f8f9fa !important
 }
 
+.show_txt {
+	display: inline-block;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden !important;
+	text-overflow: ellipsis;
+}
 
-
+#backtop {
+	width: 40px;
+	height: 40px;
+	background: #39F632;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	position: fixed;
+	bottom: 40px;
+	right: 20px;
+}

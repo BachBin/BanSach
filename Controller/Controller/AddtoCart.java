@@ -31,7 +31,7 @@ public class AddtoCart extends HttpServlet {
     	if(session.getAttribute("order")==null) {
     		gh = new GioHangbo();
     		Bookbo sbo = new Bookbo();
-    		Bookbean book = sbo.getBookbyID(ms);
+    		Bookbean book = sbo.getBookbyMaSach(ms);
     		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
     		session.setAttribute("order", gh);
     		resp.sendRedirect("home");
@@ -39,7 +39,7 @@ public class AddtoCart extends HttpServlet {
     	else {
     		gh = (GioHangbo) session.getAttribute("order");
     		Bookbo sbo = new Bookbo();
-    		Bookbean book = sbo.getBookbyID(ms);
+    		Bookbean book = sbo.getBookbyMaSach(ms);
     		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
     		session.setAttribute("order", gh);
     		resp.sendRedirect("home");
