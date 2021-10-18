@@ -38,7 +38,7 @@
 
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/alert.css" rel="stylesheet" type="text/css" />
-	<script src="js/alert.js"></script>
+	<script src="js/alert.js"></script>	
 </head>
 
 <body>
@@ -94,12 +94,21 @@
 					</div>
 					<%} %>
 				</div>
-				<div id="pager">
-      <ul id="pagination" class="pagination-sm"></ul>
-</div>
-				<% for(int i = 1 ;i<=(int)request.getAttribute("endP");i++){%>
-					<a class="<%=(int)request.getAttribute("tag")==i ?"pageactive":"" %>" href="home?Page=<%=i%>"><%=i %></a>				
-				<%} %>				
+				<%if(dsbook.size() > 0 && dsbook!=null) {%>
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				    <li class="page-item <%=(int)request.getAttribute("tag")==1 ?"disabled":"" %>">
+				      <a class="page-link" href="home?Page=<%=(int)request.getAttribute("tag") - 1%>">Prev</a>
+				    </li>
+				    <% for(int i = 1 ;i<=(int)request.getAttribute("endP");i++){%>
+				    	<li class="page-item <%=(int)request.getAttribute("tag")==i ?"active":"" %>"><a class="page-link" href="home?Page=<%=i%>"><%=i %></a></li>
+				    <%} %>
+				    <li class="page-item <%=(int)request.getAttribute("tag")== (int)request.getAttribute("endP")?"disabled":"" %>">
+				      <a class="page-link" href="home?Page=<%=(int)request.getAttribute("tag") + 1%>">Next</a>
+				    </li>
+				  </ul>
+				</nav>	
+				<%} %>	
 			</div>
 		</div>
 	</div>
