@@ -48,5 +48,37 @@ public class Bookdao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public ArrayList<Bookbean> getsachPage(int index,int size){ 
+		ArrayList<Bookbean> ds = new ArrayList<Bookbean>();
+		sql = "select * from Book order by masach offset ? ROWS FETCH NEXT ? ROWS ONLY";
+		try {
+			Connection con = new ConnecDataBase().getConnection();			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, (index-1)*size);
+			ps.setInt(2, size);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ds.add(new Bookbean(rs.getString(1),rs.getString(2),rs.getLong(3),rs.getLong(4),rs.getString(5),rs.getLong(6),rs.getString(7),rs.getDate(8),rs.getString(9)));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ds;
+	}
+	public int getTotalBook() {
+		sql = "select COUNT(*) from Book";
+		try {
+			Connection con = new ConnecDataBase().getConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {				
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}	
+	
 }

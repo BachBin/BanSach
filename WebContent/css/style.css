@@ -326,4 +326,9 @@ footer a {
 	position: fixed;
 	bottom: 40px;
 	right: 20px;
+	cursor: pointer;
+}
+a.pageactive {
+	color: green;
+	font-weight: bold;
 }

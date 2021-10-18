@@ -34,7 +34,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
 		integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		crossorigin="anonymous" referrerpolicy="no-referrer" />	
 
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/alert.css" rel="stylesheet" type="text/css" />
@@ -94,6 +94,12 @@
 					</div>
 					<%} %>
 				</div>
+				<div id="pager">
+      <ul id="pagination" class="pagination-sm"></ul>
+</div>
+				<% for(int i = 1 ;i<=(int)request.getAttribute("endP");i++){%>
+					<a class="<%=(int)request.getAttribute("tag")==i ?"pageactive":"" %>" href="home?Page=<%=i%>"><%=i %></a>				
+				<%} %>				
 			</div>
 		</div>
 	</div>

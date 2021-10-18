@@ -31,10 +31,9 @@
 	}	
 %>
 <% if(request.getAttribute("alert")!=null){%>
-<script type="text/javascript">
-	alert("<%=request.getAttribute("
-		alert ")%>");
-</script>
+	<script type="text/javascript">
+		alert("<%=request.getAttribute("alert ")%>");
+	</script>
 <%} %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a href="home" class="navbar-brand">Book<b>Name</b></a>

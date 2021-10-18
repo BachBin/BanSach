@@ -14,7 +14,9 @@ public class Bookbo {
 	public ArrayList<Bookbean> getsach(){
 		return sdao.getsach();
 	}
-	
+	public ArrayList<Bookbean> getByPage(int page,int sobai){		
+		return sdao.getsachPage(page,sobai);
+	}
 	public ArrayList<Bookbean> TimLoai(String maloai) {
 		ArrayList<Bookbean> ds = getsach();
 		ArrayList<Bookbean> tam= new ArrayList<Bookbean>();
@@ -41,4 +43,7 @@ public class Bookbo {
 	public Bookbean sachNew() {
 		return sdao.getNew();
 	}	
+	public int getTotal() {
+		return sdao.getTotalBook();
+	}
 }
