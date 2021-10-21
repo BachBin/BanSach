@@ -1,3 +1,5 @@
+<%@page import="Bean.Login"%>
+<%@page import="Bo.Loginbo"%>
 <%@page import="Bo.GioHangbo"%>
 <%@page import="Bean.Customerbean"%>
 <%@page import="Bean.GioHangbean"%>
@@ -42,7 +44,7 @@
 <body>
 	<%	
 		
-		GioHangbo order = (GioHangbo)session.getAttribute("order");
+		GioHangbo order = (GioHangbo)session.getAttribute("order");		
 		//SHĐ
 		long shd = 0;
 		if(order!=null){
@@ -55,9 +57,9 @@
 		
 	%>
 	<% 
-			Customerbean auth = null;
+			Login auth = null;
 			if(session.getAttribute("auth")!=null){
-				auth = (Customerbean)session.getAttribute("auth");
+				auth = (Login)session.getAttribute("auth");
 			}			
 	%>
 	<jsp:include page="includes/Menu.jsp" />
@@ -72,7 +74,7 @@
 			<div class="container my-3">
 				<div class="d-flex py-3">
 					<h3 id="sumTien">Tổng tiền: <%=NumberFormat.getNumberInstance(Locale.US).format(tong) %> VNĐ</h3>
-					<a class="mx-3 btn btn-primary" href="cart-check-out">Thanh toán</a>
+					<a class="mx-3 btn btn-primary" href="thanhtoan">Thanh toán</a>
 				</div>
 				<table id="shoppingCart" class="table table-condensed table-responsive">
 					<thead>
@@ -106,8 +108,8 @@
 								<div class="form-group d-flex justify-content-between">
 									<a onclick="incdecAjax('<%=i.getMasach() %>','inc')" class="btn bnt-sm btn-incre"
 										href="javascript:return false;"><i class="fas fa-plus-square"></i></a>
-									<input style="min-width: 100px;" type="text" name="quantity" class="form-control"
-										id="txt<%=i.getMasach() %>" readonly value="<%= i.getSlmua()%>">
+									<input style="min-width: 100px;" type="number" name="quantity" class="form-control"
+										id="txt<%=i.getMasach() %>"  readonly value="<%= i.getSlmua()%>">
 									<a onclick="incdecAjax('<%=i.getMasach() %>','dec')" class="btn btn-sm btn-decre"
 										href="javascript:return false;"><i class="fas fa-minus-square"></i></a>
 								</div>

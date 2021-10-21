@@ -1,3 +1,4 @@
+<%@page import="Bean.Login"%>
 <%@page import="Bean.Customerbean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -35,7 +36,7 @@
 	<%
 		String tk = "";
 		String mk = "";
-		Customerbean user = (Customerbean) session.getAttribute("auth");
+		Login user = (Login) session.getAttribute("auth");
 		if(user!=null){
 			tk = user.getTendn();
 			mk = user.getMatkhau();
@@ -77,7 +78,7 @@
 			<a href="#" id="forgot_pswd">Quên mật khẩu?</a>
 			<hr>
 			<!-- <p>Don't have an account!</p>  -->
-			<a href="register.jsp" style="color: white;" class="btn btn-primary "><i class="fas fa-user-plus"></i> Đăng
+			<a href="register" style="color: white;" class="btn btn-primary "><i class="fas fa-user-plus"></i> Đăng
 				ký tài khoản</a>
 
 		</form>

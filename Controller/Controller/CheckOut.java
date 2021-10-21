@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Bean.Order;
+import Bo.GioHangbo;
 
 /**
  * Servlet implementation class CheckOut
@@ -29,13 +30,7 @@ public class CheckOut extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Order order = (Order)request.getSession().getAttribute("order");
-		if(order!=null) {
-			request.getSession().setAttribute("order","");
-		}
-			
-		RequestDispatcher dispatcher = request.getRequestDispatcher("GioHang.jsp");
-		dispatcher.forward(request, response);
+		
 	}
 
 	

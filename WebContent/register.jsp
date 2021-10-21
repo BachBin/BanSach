@@ -25,17 +25,9 @@
             <%=(String)request.getAttribute("mess") %>
         </div>
         <%} %>
-        <form action="new-user" class="logreg-forms" method="post">
-            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> ĐĂNG KÝ</h1>
-            <input type="text" name="hotencr" class="form-control" placeholder="Họ và tên" required="" autofocus=""
-                value="<%=(request.getAttribute("hoten")!=null)?(String)request.getAttribute("hoten"):""%>">
-            <input type="text" name="diachicr" class="form-control" placeholder="Địa chỉ" required="" autofocus=""
-                value="<%=(request.getAttribute("diachi")!=null)?(String)request.getAttribute("diachi"):""%>">
-            <input type="text" name="sdtcr" class="form-control" placeholder="Số điện thoại" required="" autofocus=""
-                value="<%=(request.getAttribute("sdt")!=null)?(String)request.getAttribute("sdt"):""%>">
-            <input type="email" name="emailcr" class="form-control" placeholder="Email" required="" autofocus=""
-                value="<%=(request.getAttribute("email")!=null)?(String)request.getAttribute("email"):""%>">
-
+        <form action="create" class="logreg-forms" method="post">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> ĐĂNG KÝ</h1>              
+            
             <input type="text" name="tendncr" class="form-control" placeholder="Tên đăng nhập" required="" autofocus=""
                 value="<%=(request.getAttribute("tendn")!=null)?(String)request.getAttribute("tendn"):""%>">
             <input type="password" name="matkhaucr" class="form-control" placeholder="Mật khẩu" required autofocus=""

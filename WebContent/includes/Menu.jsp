@@ -1,8 +1,6 @@
+<%@page import="Bean.Login"%>
 <%@page import="Bean.Customerbean"%>
 <%@page import="Bo.GioHangbo"%>
-
-
-
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -25,9 +23,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Customerbean auth = null;
+	Login auth = null;
 	if(session.getAttribute("auth")!=null){
-		auth = (Customerbean)session.getAttribute("auth");
+		auth = (Login)session.getAttribute("auth");
 	}	
 %>
 <% if(request.getAttribute("alert")!=null){%>
@@ -49,13 +47,25 @@
 					GioHangbo ds =  (GioHangbo)session.getAttribute("order");
 					if(ds!=null)
 						sizeCart = ds.Size();
-				%>
-			<a href="cart" class="nav-item nav-link">Giỏ hàng <span id="cartMenu"
-					class="badge badge-danger"><%= sizeCart%></span></a>
-			<% if(auth!=null) {	%>
-			<a href="" class="nav-item nav-link">Thanh toán</a>
-			<a href="" class="nav-item nav-link">Lịch sử mua hàng</a>
+			%>
+			<%if(auth!=null && auth.isIsadmin()==true) {%>
+				<a href="" class="nav-item nav-link">Quản lý sách</a>
+				<a href="" class="nav-item nav-link">Quản lý tài khoản</a>
 			<%} %>
+			<%if(auth==null){%>
+				<a href="cart" class="nav-item nav-link">Giỏ hàng <span id="cartMenu"
+					class="badge badge-danger"><%= sizeCart%></span></a>		
+			<%} else if(auth!=null && auth.isIsadmin()==false){%>
+				<a href="cart" class="nav-item nav-link">Giỏ hàng <span id="cartMenu"
+					class="badge badge-danger"><%= sizeCart%></span></a>
+				<a href="" class="nav-item nav-link">Thanh toán</a>
+				<a href="" class="nav-item nav-link">Lịch sử mua hàng</a>
+			<%} %>
+			
+			
+			
+			
+			
 		</div>
 		<form class="navbar-form form-inline" action="searchenter">
 			<div class="input-group search-box">
@@ -72,7 +82,7 @@
 
 
 		<% if(auth == null){ 
-				auth = new Customerbean(-1,"","","","","","");
+				auth = new Login("","",false);
 			%>
 
 
@@ -92,9 +102,8 @@
 		<div class="nav-item dropdown">
 			<a href="#" data-toggle="dropdown" style="width: 100px"
 				class="nav-link dropdown-toggle mr-4 btn btn-info btn-lg">
-				<i class="fas fa-user"></i>
-				<% String[] tem = auth.getHoten().split("\\s+");%>
-				<%= tem[tem.length-1]%>
+				<i class="fas fa-user"></i>	
+				 <%=auth.getTendn() %>
 			</a>
 			<div class="dropdown-menu action-form">
 				<form action="editUser" method="post">
@@ -112,23 +121,8 @@
 						<input type="password" id="password" class="form-control rounded" placeholder="Mật khẩu"
 							required="required" name="matkhau" value="<%=auth.getMatkhau()%>">
 						<span id="toggle" class="fa fa-fw fa-eye pass-icon"></span>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Họ và tên" required="required" name="hoten"
-							value="<%=auth.getHoten()%>">
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Địa chỉ" required="required" name="diachi"
-							value="<%=auth.getDiachi()%>">
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Số điện thoại" required="required"
-							name="sdt" value="<%=auth.getSdt()%>">
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Email" required="required" name="email"
-							value="<%=auth.getEmail()%>">
-					</div>
+					</div>					
+					
 					<input type="submit" class="btn btn-primary btn-block" value="Cập nhật thông tin">
 				</form>
 				<br>
