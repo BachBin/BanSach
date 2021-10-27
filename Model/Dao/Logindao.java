@@ -48,9 +48,10 @@ public class Logindao {
 		try {
 			Connection con = new ConnecDataBase().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, user.getTendn());
-			ps.setString(2, user.getMatkhau());
-			ps.setBoolean(3, user.isIsadmin());
+			ps.setString(1, user.getMatkhau());
+			ps.setBoolean(2, user.isIsadmin());
+			ps.setString(3, user.getTendn());
+			
 			
 			return ps.executeUpdate() > 0;			
 			

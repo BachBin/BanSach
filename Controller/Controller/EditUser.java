@@ -15,7 +15,9 @@ import javax.websocket.Session;
 import com.google.gson.Gson;
 
 import Bean.Customerbean;
+import Bean.Login;
 import Bo.Customerbo;
+import Bo.Loginbo;
 
 
 @WebServlet("/editUser")
@@ -26,23 +28,21 @@ public class EditUser extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("utf-8");		
 		HttpSession session = req.getSession();
-		Customerbean user = (Customerbean)session.getAttribute("auth");		
+		Login user = (Login)session.getAttribute("auth");		
 		String id = req.getParameter("makh");
 		String mk = req.getParameter("matkhau");		
-		String ht = req.getParameter("hoten");
-		String dc = req.getParameter("diachi");
-		String sdt = req.getParameter("sdt");
-		String email = req.getParameter("email");				
-		if(user.getTendn().equals(id) && user.getMatkhau().equals(mk) && user.getHoten().equals(ht) && user.getDiachi().equals(dc) && user.getSdt().equals(sdt) && user.getEmail().equals(email)) {
+		
+		if(user.getTendn().equals(id) && user.getMatkhau().equals(mk)) {
 			resp.sendRedirect("home");	
 		}
 		else {
-			Customerbo kbo = new Customerbo();
-			if(kbo.updateCustomer(new Customerbean(user.getId(), ht, dc, sdt, email, id, mk))) {
-				session.setAttribute("auth", new Customerbean(user.getId(), ht, dc, sdt, email, id, mk));
+			Loginbo kbo = new Loginbo();
+			Login usernew = new Login(id, mk, user.isIsadmin());
+			if(kbo.updateLogin(usernew)) {
+				session.setAttribute("auth", usernew);
 				req.setAttribute("alert","Cập nhật tài khoản thành công!");
-				req.getRequestDispatcher("home").forward(req, resp);			
-			}
+				req.getRequestDispatcher("home").forward(req, resp);
+			}			
 		} 			
 	}
 }

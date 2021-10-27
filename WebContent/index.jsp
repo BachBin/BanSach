@@ -52,10 +52,9 @@
 			String tk = request.getParameter("makh");
 			String mk = request.getParameter("matkhau");			
 			if(tk==null) tk = "";
-			if(mk==null) mk = "";
-			
-			
-		%>
+			if(mk==null) mk = "";			
+	%>	
+	
 	<div id="toast"></div>
 	<jsp:include page="includes/Menu.jsp" />
 

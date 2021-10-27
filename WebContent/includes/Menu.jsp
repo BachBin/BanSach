@@ -30,7 +30,7 @@
 %>
 <% if(request.getAttribute("alert")!=null){%>
 	<script type="text/javascript">
-		alert("<%=request.getAttribute("alert ")%>");
+		alert("<%=request.getAttribute("alert")%>");
 	</script>
 <%} %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -112,7 +112,7 @@
 					<br>
 					<div class="form-group">
 						<div class="input-group">
-							<input type="text" class="form-control rounded" placeholder="Mã khách hàng"
+							<input readonly="readonly" type="text" class="form-control rounded" placeholder="Mã khách hàng"
 								required="required" name="makh" value="<%=auth.getTendn()%>">
 						</div>
 					</div>

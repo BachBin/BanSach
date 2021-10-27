@@ -40,8 +40,8 @@ public class HomeControl extends HttpServlet {
 		
 		ArrayList<Bookbean> dsbook = sbo.getByPage(index,sobai);
 		//ArrayList<Bookbean> dsbook = sbo.getsach();
-		ArrayList<Categorybean> dscate = lbo.getloai();
-		
+		ArrayList<Categorybean> dscate = lbo.getloai();		
+				
 		request.setAttribute("tag", index);
 		request.setAttribute("endP", endPage);
 		request.setAttribute("dsbook", dsbook);
