@@ -1,21 +1,17 @@
 package Dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import Bean.Bookbean;
-import Bean.Cart;
 import Connection.ConnecDataBase;
 
 
 
-//Bookbean(String masach, String tensach, Long soluong, Long gia, String maloai, Long sotap, String anh, Date ngaynhap, String tacgia)
-//					1				2			3				4			5			6			 7			  8				  9
 public class Bookdao {
 	String sql;	
 	public ArrayList<Bookbean> getsach(){

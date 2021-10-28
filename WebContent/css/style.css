@@ -317,12 +317,12 @@ footer a {
 #backtop {
 	width: 40px;
 	height: 40px;
-	background: #39F632;
+	background: #33cabb;
 	color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 50%;
+	border-radius: 25%;
 	position: fixed;
 	bottom: 40px;
 	right: 20px;

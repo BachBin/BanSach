@@ -66,11 +66,11 @@
 					<%for(Bookbean s: dsbook){ %>
 					<div class="col-12 col-md-6 col-lg-4">
 						<div class="card">
+						<a href="detail?bookid=<%=s.getMasach() %>"	title="View Product">
 							<img class="card-img-top" style="height: 200px" src="<%=s.getAnh()%>" alt="Chưa có ảnh">
 							<div class="card-body">
 								<h4 class="card-title show_txt">
-									<a href="detail?bookid=<%=s.getMasach() %>"
-										title="View Product"><%=s.getTensach()%></a>
+									<%=s.getTensach()%>
 								</h4>
 								<p class="card-text show_txt"><i class="fas fa-at"></i> Tác giả: <%=s.getTacgia() %></p>
 								<div class="row">
@@ -89,25 +89,11 @@
 									</div>
 								</div>
 							</div>
+							</a>
 						</div>
 					</div>
 					<%} %>
-				</div>
-				<%if(dsbook.size() > 0 && dsbook!=null) {%>
-				<nav aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center">
-				    <li class="page-item <%=(int)request.getAttribute("tag")==1 ?"disabled":"" %>">
-				      <a class="page-link" href="home?Page=<%=(int)request.getAttribute("tag") - 1%>">Prev</a>
-				    </li>
-				    <% for(int i = 1 ;i<=(int)request.getAttribute("endP");i++){%>
-				    	<li class="page-item <%=(int)request.getAttribute("tag")==i ?"active":"" %>"><a class="page-link" href="home?Page=<%=i%>"><%=i %></a></li>
-				    <%} %>
-				    <li class="page-item <%=(int)request.getAttribute("tag")== (int)request.getAttribute("endP")?"disabled":"" %>">
-				      <a class="page-link" href="home?Page=<%=(int)request.getAttribute("tag") + 1%>">Next</a>
-				    </li>
-				  </ul>
-				</nav>	
-				<%} %>	
+				</div>					
 			</div>
 		</div>
 	</div>

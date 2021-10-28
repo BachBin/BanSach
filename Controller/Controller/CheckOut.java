@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Bean.Order;
+import Bean.Login;
 import Bo.GioHangbo;
 
 /**
@@ -18,21 +18,14 @@ import Bo.GioHangbo;
  */
 @WebServlet("/thanhtoan")
 public class CheckOut extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CheckOut() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	
+	private static final long serialVersionUID = 1L; 
+    @Override
+    	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    		HttpSession session = req.getSession();
+    		Login auth = (Login)session.getAttribute("auth");
+    		if(auth==null) {
+    			resp.sendRedirect("login");
+    		}
+    	}
 
 }

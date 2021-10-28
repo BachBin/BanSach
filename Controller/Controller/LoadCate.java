@@ -31,10 +31,11 @@ public class LoadCate extends HttpServlet {
     		for(Bookbean b:listbook) {
     			out.println("<div class=\"col-12 col-md-6 col-lg-4\">\r\n"
     					+ "						<div class=\"card\">\r\n"
+    					+ "						<a href=\"detail?bookid="+b.getMasach()+"\"	title=\"View Product\">\r\n"
     					+ "							<img class=\"card-img-top\" style=\"height: 200px\" src=\""+b.getAnh()+"\" alt=\"Chưa có ảnh\">\r\n"
     					+ "							<div class=\"card-body\">\r\n"
     					+ "								<h4 class=\"card-title show_txt\">\r\n"
-    					+ "									<a href=\"detail?bookid="+b.getMasach()+"\" title=\"View Product\">"+b.getTensach()+"</a>\r\n"
+    					+ "									"+b.getTensach()+"\r\n"
     					+ "								</h4>\r\n"
     					+ "								<p class=\"card-text show_txt\"><i class=\"fas fa-at\"></i> Tác giả: "+b.getTacgia()+"</p>\r\n"
     					+ "								<div class=\"row\">\r\n"
@@ -48,10 +49,12 @@ public class LoadCate extends HttpServlet {
     					+ "									</div>\r\n"
     					+ "									<div class=\"col\">\r\n"
     					+ "										<a href=\"javascript:return false;\" onclick=\"addAjax("+b.getMasach()+")\"\r\n"
-    					+ "											class=\"btn btn-success btn-block\">Thêm giỏ</a>\r\n"
+    					+ "											class=\"btn btn-success btn-block\"><i class=\"fas fa-cart-plus\"></i> Thêm\r\n"
+    					+ "											giỏ</a>\r\n"
     					+ "									</div>\r\n"
     					+ "								</div>\r\n"
     					+ "							</div>\r\n"
+    					+ "							</a>\r\n"
     					+ "						</div>\r\n"
     					+ "					</div>");
     		}
