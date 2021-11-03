@@ -36,9 +36,8 @@
 		integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />	
 
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href="css/alert.css" rel="stylesheet" type="text/css" />
-	<script src="js/alert.js"></script>	
+	<link href="css/style.css" rel="stylesheet" type="text/css" />	
+	<script src="js/tata.js"></script>	
 </head>
 
 <body>
@@ -118,6 +117,7 @@
 	</script>
 	<jsp:include page="includes/Footer.jsp"></jsp:include>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="js/tata.js"></script>
 	<script type="text/javascript">
 		function addAjax(masach) {
 			$.ajax({
@@ -128,32 +128,16 @@
 				},
 				success: function (data) {
 					var sizecart = document.getElementById("cartMenu");
-					sizecart.innerHTML = data;
-					showSuccessToast("Đã thêm sách vào giỏ.");
+					sizecart.innerHTML = data;					
+					tata.success('Thành công', 'Đã thêm sách vào giỏ!');
 				},
 				error: function (xhr) {
 					location.reload();
 				}
 			});
-		}
+		}		
 
-		function showSuccessToast(mess) {
-			toast({
-				title: "Thành công!",
-				message: mess,
-				type: "success",
-				duration: 5000
-			});
-		}
-
-		function showErrorToast(mess) {
-			toast({
-				title: "Thất bại!",
-				message: mess,
-				type: "error",
-				duration: 5000
-			});
-		}
+		
 	</script>
 </body>
 

@@ -82,6 +82,7 @@
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/tata.js"></script>
 <script type="text/javascript">
 	function addAjax(masach) {
 		var quantity = document.getElementById('quantity').value;
@@ -95,7 +96,7 @@
 			success: function (data) {
 				var sizecart = document.getElementById("cartMenu");
 				sizecart.innerHTML = data;
-				showSuccessToast("Đã thêm sách vào giỏ.");
+				tata.success('Thành công', 'Đã thêm sách vào giỏ!');
 			},
 			error: function (xhr) {
 				location.reload();
@@ -103,23 +104,7 @@
 		});
 	}
 
-	function showSuccessToast(mess) {
-		toast({
-			title: "Thành công!",
-			message: mess,
-			type: "success",
-			duration: 5000
-		});
-	}
-
-	function showErrorToast(mess) {
-		toast({
-			title: "Thất bại!",
-			message: mess,
-			type: "error",
-			duration: 5000
-		});
-	}
-</script>s
+	
+</script>
 
 </html>
