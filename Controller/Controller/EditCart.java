@@ -27,11 +27,11 @@ public class EditCart extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ArrayList<String> res = new ArrayList<String>();		
-		String id = req.getParameter("id");
+		Long id = Long.valueOf(req.getParameter("id"));
 		HttpSession session = req.getSession();
 		GioHangbo gh = (GioHangbo)session.getAttribute("order");
 		for(GioHangbean e:gh.ds) {
-			if(e.getMasach().equals(id)) {
+			if(e.getMasach()==id) {
 				gh.ds.remove(e);			
 				break;
 			}

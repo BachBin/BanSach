@@ -44,7 +44,7 @@
 		<div class="card-body">
 			<img class="img-fluid card-img-top" src="<%=booknew.getAnh()%>">
 			<h3>
-				<a href="detail?bookid=<%=booknew.getMasach() %>" class="card-title"><%=booknew.getTensach()%></a>
+				<a href="detail?bookid='<%=booknew.getMasach() %>'" class="card-title"><%=booknew.getTensach()%></a>
 			</h3>
 			<p class="card-text"><i class="fas fa-at"></i> Tác giả: <%=booknew.getTacgia() %></p>
 			<p class="bloc_left_price">

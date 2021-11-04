@@ -3,19 +3,19 @@ package Bean;
 import java.sql.Date;
 
 public class GioHangbean {
-	private String masach;
+	private Long masach;
 	private String tensach;
 	private String tacgia;
 	private String anh;
 	private Long gia;
-	private Long slmua;
+	private int slmua;
 	private Long thanhtien;
 	public GioHangbean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}	
 
-	public GioHangbean(String masach, String tensach, String tacgia, String anh, Long gia, Long slmua) {
+	public GioHangbean(Long masach, String tensach, String tacgia, String anh, Long gia, int slmua) {
 		super();
 		this.masach = masach;
 		this.tensach = tensach;
@@ -26,11 +26,11 @@ public class GioHangbean {
 		this.thanhtien = gia * slmua;
 	}
 
-	public String getMasach() {
+	public Long getMasach() {
 		return masach;
 	}
 
-	public void setMasach(String masach) {
+	public void setMasach(Long masach) {
 		this.masach = masach;
 	}
 
@@ -66,11 +66,11 @@ public class GioHangbean {
 		this.gia = gia;
 	}
 
-	public Long getSlmua() {
+	public int getSlmua() {
 		return slmua;
 	}
 
-	public void setSlmua(Long slmua) {
+	public void setSlmua(int slmua) {
 		this.slmua = slmua;
 	}
 

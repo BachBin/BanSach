@@ -22,7 +22,8 @@ public class ProductDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @Override
     	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    		String ms = req.getParameter("bookid");
+    	try {
+    		Long ms = Long.valueOf(req.getParameter("bookid"));
     		Bookbo sbo = new Bookbo();
     		Bookbean book = sbo.getBookbyMaSach(ms);
     		Categorybo lbo = new Categorybo();
@@ -35,7 +36,9 @@ public class ProductDetail extends HttpServlet {
     		req.setAttribute("book", book);
     		
     		req.getRequestDispatcher("Details.jsp").forward(req, resp);
-    	}   
-    
+		} catch (Exception e) {
+			e.printStackTrace();
+		}    		
+    	}      
 
 }

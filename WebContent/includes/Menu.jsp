@@ -23,9 +23,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Login auth = null;
+	Customerbean auth = null;
 	if(session.getAttribute("auth")!=null){
-		auth = (Login)session.getAttribute("auth");
+		auth = (Customerbean)session.getAttribute("auth");
 	}	
 %>
 <% if(request.getAttribute("alert")!=null){%>
@@ -47,19 +47,12 @@
 					GioHangbo ds =  (GioHangbo)session.getAttribute("order");
 					if(ds!=null)
 						sizeCart = ds.Size();
-			%>
-			<%if(auth!=null && auth.isIsadmin()==true) {%>
-				<a href="" class="nav-item nav-link">Quản lý sách</a>
-				<a href="" class="nav-item nav-link">Quản lý tài khoản</a>
-			<%} %>
-			<%if(auth==null){%>
-				<a href="cart" class="nav-item nav-link">Giỏ hàng <span id="cartMenu"
-					class="badge badge-danger"><%= sizeCart%></span></a>		
-			<%} else if(auth!=null && auth.isIsadmin()==false){%>
-				<a href="cart" class="nav-item nav-link">Giỏ hàng <span id="cartMenu"
-					class="badge badge-danger"><%= sizeCart%></span></a>
-				<a href="" class="nav-item nav-link">Thanh toán</a>
-				<a href="" class="nav-item nav-link">Lịch sử mua hàng</a>
+			%>	
+			<a href="cart" class="nav-item nav-link">Giỏ hàng <span id="cartMenu"
+					class="badge badge-danger"><%= sizeCart%></span></a>			
+			<%if(auth!=null){%>			
+				<a href="thanhtoan" class="nav-item nav-link">Thanh toán</a>
+				<a href="lichsumuahang" class="nav-item nav-link">Lịch sử mua hàng</a>				
 			<%} %>
 			
 			
@@ -82,7 +75,7 @@
 
 
 		<% if(auth == null){ 
-				auth = new Login("","",false);
+				auth = new Customerbean(-1,"","","","","","");
 			%>
 
 

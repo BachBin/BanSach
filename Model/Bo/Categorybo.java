@@ -12,7 +12,7 @@ import Dao.Categorydao;
 public class Categorybo {
 	
 	Categorydao ldao = new Categorydao();
-	public ArrayList<Categorybean> getloai(){
+	public ArrayList<Categorybean> getloai() throws Exception {
 		return ldao.getloai();
 	}
 }

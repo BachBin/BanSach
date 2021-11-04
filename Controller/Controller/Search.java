@@ -20,7 +20,8 @@ public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;       
    
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
+		try {
+			req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("utf-8");
 		String search = req.getParameter("search");
 		Bookbo sbo = new Bookbo();
@@ -28,5 +29,9 @@ public class Search extends HttpServlet {
 		req.setAttribute("dsbooktk", dsbook);
 		req.setAttribute("search", search);
 		req.getRequestDispatcher("home").forward(req, resp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

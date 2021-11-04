@@ -1,3 +1,4 @@
+<%@page import="Bo.GioHangbo"%>
 <%@page import="Bean.GioHangbean"%>
 <%@page import="Dao.Bookdao"%>
 <%@page import="Bean.Customerbean"%>
@@ -18,7 +19,7 @@
 <html>
 
 <head>
-	<title>Đăng ký</title>
+	<title>Thanh toán</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">		
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -29,43 +30,50 @@
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="css/dkdn.css">
+	<link rel="stylesheet" href="css/dkdn.css">	
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link href="css/style.css" rel="stylesheet" type="text/css" />	
-	<style type="text/css">
-		.pass-icon {
-			float: right;
-			margin-top: -29px;
-			margin-right: 10px;
-			position: relative;
-			z-index: 5;
-			font-size: 18px;
-			cursor: pointer;
-		}
-	</style>	
+	<link href="css/style.css" rel="stylesheet" type="text/css" />			
 </head>
 
 <body>
 
-	<% 		
+	<% 					
+   	String tk ="";
+	String mk ="";
 	
-	String hoten= (request.getAttribute("hoten")!=null)?(String)request.getAttribute("hoten"):"";
-	String diachi= (request.getAttribute("diachi")!=null)?(String)request.getAttribute("diachi"):"";
-	String sdt= (request.getAttribute("sdt")!=null)?(String)request.getAttribute("sdt"):"";
-	String email= (request.getAttribute("email")!=null)?(String)request.getAttribute("email"):"";
-    String tk = (request.getAttribute("tknew")!=null)?(String)request.getAttribute("tknew"):"";
-    String mk = (request.getAttribute("mknew")!=null)?(String)request.getAttribute("mknew"):"";
-    String remk = (request.getAttribute("remk")!=null)?(String)request.getAttribute("remk"):"";
-    
     Customerbean user = (Customerbean) session.getAttribute("auth");
+	String hoten= (user.getHoten()!=null)?user.getHoten():"";
+	String diachi= (user.getDiachi()!=null)?user.getDiachi():"";
+	String sdt= (user.getSdt()!=null)?user.getSdt():"";
+	String email= (user.getEmail()!=null)?user.getEmail():"";
+   
+    
     if(user!=null){
         tk = user.getTendn();
         mk = user.getMatkhau();
-    }   
+    }
+    if(request.getAttribute("tknew")!=null && request.getAttribute("mknew")!=null) {
+        tk = (String)request.getAttribute("tknew");
+        mk = (String)request.getAttribute("mknew");
+    }	
+    Customerbean auth = null;
+	if(session.getAttribute("auth")!=null){
+		auth = (Customerbean)session.getAttribute("auth");
+	}
     ArrayList<Categorybean> dscate = (ArrayList<Categorybean>)request.getAttribute("dscate");
 	Bookbean booknew = (Bookbean)request.getAttribute("booknew");
+	GioHangbo order = (GioHangbo)session.getAttribute("order");		
+	//SHĐ
+	long shd = 0;
+	if(order!=null){
+		shd = order.Size();
+	}		
+	//Tổng tiền
+	long tong = 0;
+	if(order!=null)
+		tong = order.Tongtien();
 	%>	
 	
 	<jsp:include page="includes/Menu.jsp" />
@@ -107,9 +115,9 @@
                     <div class="alert alert-danger text-justify text-center" role="alert">
                         <%=(String)request.getAttribute("mess") %>
                     </div>
-                    <%} %>
-                    <form action="create" class="logreg-forms" method="post">
-                        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> ĐĂNG KÝ</h1>              
+                    <%} %>                                      
+                    <form action="xacnhandon" class="logreg-forms" method="post">
+                        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Thông tin đặt hàng</h1>              
                         <input type="text" name="hoten" class="form-control" placeholder="Họ và tên" required="" autofocus=""
                             value="<%=hoten%>">
                         <input type="text" name="diachi" class="form-control" placeholder="Địa chỉ" required="" autofocus=""
@@ -117,20 +125,51 @@
                         <input type="number" name="sdt" class="form-control" placeholder="Số điện thoại" required="" autofocus=""
                             value="<%=sdt%>">  
                        	<input type="email" name="email" class="form-control" placeholder="Email" autofocus=""
-                            value="<%=email%>">         
-                        <input type="text" name="tendncr" class="form-control" placeholder="Tên đăng nhập" required="" autofocus=""
-                            value="<%=tk%>">
-                        <input type="password" name="matkhaucr" class="form-control" placeholder="Mật khẩu" required autofocus=""
-                            value="<%=mk%>">
-                        <input type="password" name="rematkhaucr" class="form-control" placeholder="Nhập lại mật khẩu" required
-                            autofocus="" value="<%=remk%>">
-            
-            
-                        <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Đăng ký</button>
-                        <a href="home"><i class="fas fa-angle-left"></i> Trở lại</a>
+                            value="<%=email%>">                           
+                       
+			            <button type="submit" class="btn btn-primary form-control" >Xác nhận đơn hàng</button>		               
                     </form>
-                </div>		
-			</div>
+                </div>	
+                <h3>Tổng tiền: <%= NumberFormat.getNumberInstance(Locale.US).format(tong) %> VNĐ</h3>                
+                <table id="shoppingCart" class="table table-condensed table-responsive">
+					<thead>
+						<tr>
+							<th style="width:60%">Tên sách</th>
+							<th style="width:10%">Giá</th>
+							<th style="width:25%">Số lượng</th>							
+						</tr>
+					</thead>
+					<tbody>
+						<%
+	                	if(order!=null) { 
+	                		for(GioHangbean i: order.ds){
+	               		%>
+						<tr id="row<%=i.getMasach()%>">
+							<td data-th="Product">
+								<div class="row">
+									<div class="col-md-3 text-left">
+										<img src="<%=i.getAnh() %>" alt=""
+											class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+									</div>
+									<div class="col-md-9 text-left mt-sm-2">
+										<h4 style="font-weight: 10px"><%=i.getTensach() %></h4>
+										<p class="font-weight-light">Tác giả: <%=i.getTacgia() %></p>
+									</div>
+								</div>
+							</td>
+							<td data-th="Price"><%= NumberFormat.getNumberInstance(Locale.US).format(i.getGia())%></td>
+							<td>
+								<div class="form-group d-flex justify-content-between">									
+									<input style="min-width: 100px;" type="number" name="quantity" class="form-control"
+										id="txt<%=i.getMasach() %>"  readonly value="<%= i.getSlmua()%>">									
+								</div>
+							</td>							
+						</tr>
+						<%} %>
+						<%} %>
+					</tbody>
+				</table>	
+			</div>			
 		</div>
 	</div>
 	<div id="backtop">

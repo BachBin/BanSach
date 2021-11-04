@@ -49,7 +49,7 @@
 			}
 			
 	%>
-	<div id="toast"></div>
+	
 	<jsp:include page="includes/Menu.jsp" />
 	<div class="container">
 		<div class="row">
@@ -71,7 +71,7 @@
 							<%=NumberFormat.getNumberInstance(Locale.US).format(book.getGia())%> VNĐ</p> <br><br>
 						<input class="form-control rounded quantity" type="number" value="1" min="1" name="quantity"
 							id="quantity"> <br>
-						<a href="javascript:return false;" onclick="addAjax(<%=book.getMasach() %>)"
+						<a href="javascript:return false;" onclick="addAjax('<%=book.getMasach() %>')"
 							class="btn btn-success btn-block"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</a>
 					</div>
 				</div>

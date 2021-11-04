@@ -23,17 +23,19 @@ public class HomeControl extends HttpServlet {
    
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		Bookbo sbo = new Bookbo();		
 		Categorybo lbo = new Categorybo();		
 		
 		ArrayList<Bookbean> dsbook = sbo.getsach();
 		ArrayList<Categorybean> dscate = lbo.getloai();	
-				
-		
+			
 		request.setAttribute("dsbook", dsbook);
 		request.setAttribute("dscate", dscate);
 		request.setAttribute("booknew", sbo.sachNew());
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
-
 }

@@ -6,9 +6,9 @@ import Bean.GioHangbean;
 
 public class GioHangbo {
 	public ArrayList<GioHangbean> ds = new ArrayList<GioHangbean>();
-	public 	void Them(String masach, String tensach, String tacgia, String anh, Long gia, Long sl) {
+	public 	void Them(Long masach, String tensach, String tacgia, String anh, Long gia, int sl) {
 		for(GioHangbean g:ds)
-			if(g.getMasach().equals(masach)) {
+			if(g.getMasach()==masach) {
 				g.setSlmua(g.getSlmua()+sl);				
 				return;
 			}

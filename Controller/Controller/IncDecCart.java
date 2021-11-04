@@ -25,16 +25,16 @@ public class IncDecCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Override
 		protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			String id = req.getParameter("id");
+			Long id = Long.valueOf(req.getParameter("id"));
 			String action = req.getParameter("action");
 			GioHangbo gh = null;
 			HttpSession session = req.getSession();
 			ArrayList<String> res = new ArrayList<String>();
-			long sl = 0;
+			int sl = 0;
 			if(action.equals("inc")) {
 				gh = (GioHangbo)session.getAttribute("order");
 				for(GioHangbean e:gh.ds) {
-					if(e.getMasach().equals(id)) {
+					if(e.getMasach()==id) {
 						e.setSlmua(e.getSlmua()+1);
 						sl = e.getSlmua();
 						break;
@@ -44,12 +44,12 @@ public class IncDecCart extends HttpServlet {
 			else {
 				gh = (GioHangbo)session.getAttribute("order");
 				for(GioHangbean e:gh.ds) {
-					if(e.getMasach().equals(id) && e.getSlmua() > 1) {
+					if(e.getMasach()==id && e.getSlmua() > 1) {
 						e.setSlmua(e.getSlmua()-1);
 						sl = e.getSlmua();
 						break;
 					}
-					else if(e.getMasach().equals(id) && e.getSlmua() == 1){
+					else if(e.getMasach()==id && e.getSlmua() == 1){
 						gh.ds.remove(e);
 						res.add("del");
 						break;

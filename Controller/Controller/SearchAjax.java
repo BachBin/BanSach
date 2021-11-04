@@ -21,39 +21,43 @@ public class SearchAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;     
 	@Override
 		protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			resp.setContentType("text/html;charset=UTF-8");
-			req.setCharacterEncoding("utf-8");
-			resp.setCharacterEncoding("utf-8");
-			String search = req.getParameter("search");
-			Bookbo sbo = new Bookbo();
-			ArrayList<Bookbean> listbook = sbo.Tim(search);
-			PrintWriter out = resp.getWriter();
-    		for(Bookbean b:listbook) {
-    			out.println("<div class=\"col-12 col-md-6 col-lg-4\">\r\n"
-    					+ "						<div class=\"card\">\r\n"
-    					+ "							<img class=\"card-img-top\" style=\"height: 200px\" src=\""+b.getAnh()+"\" alt=\"Chưa có ảnh\">\r\n"
-    					+ "							<div class=\"card-body\">\r\n"
-    					+ "								<h4 class=\"card-title show_txt\">\r\n"
-    					+ "									<a href=\"#\" title=\"View Product\">"+b.getTensach()+"</a>\r\n"
-    					+ "								</h4>\r\n"
-    					+ "								<p class=\"card-text show_txt\"><i class=\"fas fa-at\"></i> Tác giả: "+b.getTacgia()+"</p>\r\n"
-    					+ "								<div class=\"row\">\r\n"
-    					+ "									<div class=\"col\" style=\"cursor: default;\">\r\n"
-    					+ "										<p disabled class=\"btn btn-outline-secondary btn-block\"\r\n"
-    					+ "											style=\"cursor: default;\">Số lượng: "+b.getSoluong()+"</p>\r\n"
-    					+ "									</div>\r\n"
-    					+ "									<div class=\"col\">\r\n"
-    					+ "										<p disabled class=\"btn btn-outline-dark btn-block\" style=\"cursor: default;\">\r\n"
-    					+ "											"+NumberFormat.getNumberInstance(Locale.US).format(b.getGia())+" VNĐ</p>\r\n"
-    					+ "									</div>\r\n"
-    					+ "									<div class=\"col\">\r\n"
-    					+ "										<a href=\"javascript:return false;\" onclick=\"addAjax("+b.getMasach()+")\"\r\n"
-    					+ "											class=\"btn btn-success btn-block\">Thêm giỏ</a>\r\n"
-    					+ "									</div>\r\n"
-    					+ "								</div>\r\n"
-    					+ "							</div>\r\n"
-    					+ "						</div>\r\n"
-    					+ "					</div>");
-    		}
+			try {
+				resp.setContentType("text/html;charset=UTF-8");
+				req.setCharacterEncoding("utf-8");
+				resp.setCharacterEncoding("utf-8");
+				String search = req.getParameter("search");
+				Bookbo sbo = new Bookbo();
+				ArrayList<Bookbean> listbook = sbo.Tim(search);
+				PrintWriter out = resp.getWriter();
+	    		for(Bookbean b:listbook) {
+	    			out.println("<div class=\"col-12 col-md-6 col-lg-4\">\r\n"
+	    					+ "						<div class=\"card\">\r\n"
+	    					+ "							<img class=\"card-img-top\" style=\"height: 200px\" src=\""+b.getAnh()+"\" alt=\"Chưa có ảnh\">\r\n"
+	    					+ "							<div class=\"card-body\">\r\n"
+	    					+ "								<h4 class=\"card-title show_txt\">\r\n"
+	    					+ "									<a href=\"#\" title=\"View Product\">"+b.getTensach()+"</a>\r\n"
+	    					+ "								</h4>\r\n"
+	    					+ "								<p class=\"card-text show_txt\"><i class=\"fas fa-at\"></i> Tác giả: "+b.getTacgia()+"</p>\r\n"
+	    					+ "								<div class=\"row\">\r\n"
+	    					+ "									<div class=\"col\" style=\"cursor: default;\">\r\n"
+	    					+ "										<p disabled class=\"btn btn-outline-secondary btn-block\"\r\n"
+	    					+ "											style=\"cursor: default;\">Số lượng: "+b.getSoluong()+"</p>\r\n"
+	    					+ "									</div>\r\n"
+	    					+ "									<div class=\"col\">\r\n"
+	    					+ "										<p disabled class=\"btn btn-outline-dark btn-block\" style=\"cursor: default;\">\r\n"
+	    					+ "											"+NumberFormat.getNumberInstance(Locale.US).format(b.getGia())+" VNĐ</p>\r\n"
+	    					+ "									</div>\r\n"
+	    					+ "									<div class=\"col\">\r\n"
+	    					+ "										<a href=\"javascript:return false;\" onclick=\"addAjax("+b.getMasach()+")\"\r\n"
+	    					+ "											class=\"btn btn-success btn-block\">Thêm giỏ</a>\r\n"
+	    					+ "									</div>\r\n"
+	    					+ "								</div>\r\n"
+	    					+ "							</div>\r\n"
+	    					+ "						</div>\r\n"
+	    					+ "					</div>");
+	    		}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 }

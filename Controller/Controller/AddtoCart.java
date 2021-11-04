@@ -22,28 +22,32 @@ public class AddtoCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	long quantity = 1;
-    	GioHangbo gh = null;
-    	String ms = req.getParameter("bookId");    	
-    	String sl = req.getParameter("quantity");
-    	if(sl != null) quantity = Integer.parseInt(sl);
-    	HttpSession session = req.getSession();
-    	if(session.getAttribute("order")==null) {
-    		gh = new GioHangbo();
-    		Bookbo sbo = new Bookbo();
-    		Bookbean book = sbo.getBookbyMaSach(ms);
-    		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
-    		session.setAttribute("order", gh);
-    		resp.sendRedirect("home");
-    	}
-    	else {
-    		gh = (GioHangbo) session.getAttribute("order");
-    		Bookbo sbo = new Bookbo();
-    		Bookbean book = sbo.getBookbyMaSach(ms);
-    		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
-    		session.setAttribute("order", gh);
-    		resp.sendRedirect("home");
-    	}
+    	try {
+    		int quantity = 1;
+        	GioHangbo gh = null;
+        	Long ms = Long.valueOf(req.getParameter("bookId"));    	
+        	String sl = req.getParameter("quantity");
+        	if(sl != null) quantity = Integer.parseInt(sl);
+        	HttpSession session = req.getSession();
+        	if(session.getAttribute("order")==null) {
+        		gh = new GioHangbo();
+        		Bookbo sbo = new Bookbo();
+        		Bookbean book = sbo.getBookbyMaSach(ms);
+        		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
+        		session.setAttribute("order", gh);
+        		resp.sendRedirect("home");
+        	}
+        	else {
+        		gh = (GioHangbo) session.getAttribute("order");
+        		Bookbo sbo = new Bookbo();
+        		Bookbean book = sbo.getBookbyMaSach(ms);
+        		gh.Them(ms, book.getTensach(), book.getTacgia(), book.getAnh(), book.getGia(), quantity);
+        		session.setAttribute("order", gh);
+        		resp.sendRedirect("home");
+        	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}    	
     }
 
 }

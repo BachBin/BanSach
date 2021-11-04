@@ -50,8 +50,7 @@ public class Logindao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user.getMatkhau());
 			ps.setBoolean(2, user.isIsadmin());
-			ps.setString(3, user.getTendn());
-			
+			ps.setString(3, user.getTendn());	
 			
 			return ps.executeUpdate() > 0;			
 			

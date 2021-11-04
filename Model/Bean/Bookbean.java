@@ -5,7 +5,7 @@ import java.sql.Date;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
 public class Bookbean {	
-	private String masach;
+	private Long masach;
 	private String tensach;
 	private Long soluong;
 	private Long gia;
@@ -18,7 +18,7 @@ public class Bookbean {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bookbean(String masach, String tensach, Long soluong, Long gia, String maloai, Long sotap, String anh,
+	public Bookbean(Long masach, String tensach, Long soluong, Long gia, String maloai, Long sotap, String anh,
 			Date ngaynhap, String tacgia) {
 		super();
 		this.masach = masach;
@@ -31,10 +31,10 @@ public class Bookbean {
 		this.ngaynhap = ngaynhap;
 		this.tacgia = tacgia;
 	}
-	public String getMasach() {
+	public Long getMasach() {
 		return masach;
 	}
-	public void setMasach(String masach) {
+	public void setMasach(Long masach) {
 		this.masach = masach;
 	}
 	public String getTensach() {

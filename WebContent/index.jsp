@@ -52,9 +52,13 @@
 			String mk = request.getParameter("matkhau");			
 			if(tk==null) tk = "";
 			if(mk==null) mk = "";			
-	%>	
+	%>		
+	<% if(session.getAttribute("successod")!=null) {%>
+	<script type="text/javascript">
+		tata.success('Thành công', 'Đặt hàng thành công, chúng tôi sẽ liên lạc sớm!');
+	</script>		
 	
-	<div id="toast"></div>
+	<%session.removeAttribute("successod");} %>
 	<jsp:include page="includes/Menu.jsp" />
 
 	<div class="container">
@@ -65,7 +69,7 @@
 					<%for(Bookbean s: dsbook){ %>
 					<div class="col-12 col-md-6 col-lg-4">
 						<div class="card">
-						<a href="detail?bookid=<%=s.getMasach() %>"	title="View Product">
+						<a href='detail?bookid=<%=s.getMasach() %>'	title="View Product">
 							<img class="card-img-top" style="height: 200px" src="<%=s.getAnh()%>" alt="Chưa có ảnh">
 							<div class="card-body">
 								<h4 class="card-title show_txt">
@@ -82,7 +86,7 @@
 											<%=NumberFormat.getNumberInstance(Locale.US).format(s.getGia())%> VNĐ</p>
 									</div>
 									<div class="col">
-										<a href="javascript:return false;" onclick="addAjax(<%=s.getMasach() %>)"
+										<a href="javascript:return false;" onclick="addAjax('<%=s.getMasach() %>')"
 											class="btn btn-success btn-block"><i class="fas fa-cart-plus"></i> Thêm
 											giỏ</a>
 									</div>

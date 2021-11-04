@@ -23,7 +23,8 @@ public class LoadCate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @Override
     	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	resp.setContentType("text/html;charset=UTF-8");
+    	try {
+    		resp.setContentType("text/html;charset=UTF-8");
     		String ml = req.getParameter("maloai");
     		Bookbo sbo = new Bookbo();
     		ArrayList<Bookbean> listbook = sbo.TimLoai(ml);
@@ -58,5 +59,8 @@ public class LoadCate extends HttpServlet {
     					+ "						</div>\r\n"
     					+ "					</div>");
     		}
-    	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}    	
+    }
 }
