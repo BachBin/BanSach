@@ -12,6 +12,13 @@ public class Bookbo {
 	public ArrayList<Bookbean> getsach() throws Exception {
 		return sdao.getsach();
 	}
+	public Long getPrice(Long masach) throws Exception {
+		for(Bookbean s:getsach()) {
+			if(s.getMasach() == masach) 
+				return s.getGia();
+		}
+		return null;
+	}
 	public ArrayList<Bookbean> getByPage(int page,int sobai) throws Exception {		
 		return sdao.getsachPage(page,sobai);
 	}

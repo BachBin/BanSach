@@ -35,28 +35,38 @@ public class SuccessOrder extends HttpServlet {
 			resp.setCharacterEncoding("utf-8");
 			HttpSession session = req.getSession();
 			Customerbean auth = (Customerbean)session.getAttribute("auth");
-			Date date = new Date();		
-			Timestamp datecreate = new Timestamp(date.getTime());
-			Orderbo odbo = new Orderbo();
-			Order od = new Order((long)-1,auth.getId(),datecreate,true);
-			Long idOrder = odbo.createOrder(od);
-			if(idOrder > 0) {
-				GioHangbo order = (GioHangbo)session.getAttribute("order");		
-				if(order!=null) { 
-					OrderDetailbo dtbo = new OrderDetailbo();
-            		for(GioHangbean i: order.ds){            						
-            			OrderDetail dt = new OrderDetail((long)-1, i.getMasach(), i.getSlmua(), idOrder, true);
-            			dtbo.createOrderDetail(dt);
-            		}
+			GioHangbo order = (GioHangbo)session.getAttribute("order");		
+			if(order!=null && order.Size()>0) {
+				Date date = new Date();		
+				Timestamp datecreate = new Timestamp(date.getTime());
+				Orderbo odbo = new Orderbo();
+				Order od = new Order((long)-1,auth.getId(),datecreate,true);
+				Long idOrder = odbo.createOrder(od);
+				if(idOrder > 0) {								
+					if(order!=null && order.Size()>0) {
+						if(order!=null) { 
+							OrderDetailbo dtbo = new OrderDetailbo();
+		            		for(GioHangbean i: order.ds){            						
+		            			OrderDetail dt = new OrderDetail((long)-1, i.getMasach(), i.getSlmua(), idOrder, true);
+		            			dtbo.createOrderDetail(dt);
+		            		}
+						}
+						session.setAttribute("successod", "Tạo đơn thành công!");
+						resp.sendRedirect("home");		
+					}					
 				}
-				session.setAttribute("successod", "Tạo đơn thành công!");
-				resp.sendRedirect("home");				
+				else {
+					req.setAttribute("mess", "Không thể tạo đơn hàng!");
+					RequestDispatcher rd = req.getRequestDispatcher("thanhtoan");
+	    			rd.forward(req, resp);    	
+				}
 			}
 			else {
-				req.setAttribute("mess", "Không thể tạo đơn hàng!");
+				req.setAttribute("mess", "Không có hàng!");
 				RequestDispatcher rd = req.getRequestDispatcher("thanhtoan");
     			rd.forward(req, resp);    	
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

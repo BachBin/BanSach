@@ -34,8 +34,10 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
 		integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />	
+		crossorigin="anonymous" referrerpolicy="no-referrer" />		
 
+	<link rel="stylesheet" href="css/swiper-bundle.min.css">
+	<script src="js/swiper-bundle.min.js"></script>
 	<link href="css/style.css" rel="stylesheet" type="text/css" />	
 	<script src="js/tata.js"></script>	
 </head>
@@ -65,6 +67,14 @@
 		<div class="row">
 			<jsp:include page="includes/Left.jsp" />
 			<div class="col-sm-9">
+				<div class="swiper-container mySwiper">
+                    <div class="swiper-wrapper">
+                        <img src="image_sach/ancient-place.jpg" class="about__img swiper-slide slide-about" style="height: 200px; width: 100%;">
+                        <img src="image_sach/kayaks.jpg" class="about__img swiper-slide slide-about" style="height: 200px;">
+                        <img src="image_sach/mountain-view.jpg" class="about__img swiper-slide slide-about" style="height: 200px;">
+                    	<img src="image_sach/riverside-city.jpg" class="about__img swiper-slide slide-about" style="height: 200px;">                    
+                    </div>                                      
+                </div>
 				<div id="content" class="row">
 					<%for(Bookbean s: dsbook){ %>
 					<div class="col-12 col-md-6 col-lg-4">
@@ -139,8 +149,15 @@
 					location.reload();
 				}
 			});
-		}		
-
+		}	
+		var swiper = new Swiper(".mySwiper", {
+		    spaceBetween: 30,
+		    centeredSlides: true,
+		    autoplay: {
+		      delay: 1000,
+		      disableOnInteraction: false,
+		    },        
+		  });
 		
 	</script>
 </body>

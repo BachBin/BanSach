@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -14,10 +15,14 @@ import javax.servlet.http.HttpSession;
 import Bean.Bookbean;
 import Bean.Categorybean;
 import Bean.Customerbean;
+import Bean.Order;
+import Bean.OrderDetail;
 import Bean.SubOrder;
 import Bo.Bookbo;
 import Bo.Categorybo;
-import Bo.SubOrderbo;
+import Bo.OrderDetailbo;
+import Bo.Orderbo;
+
 
 /**
  * Servlet implementation class History
@@ -35,16 +40,35 @@ public class History extends HttpServlet {
     		}
     		else {
     			Long makh = auth.getId();
-    			SubOrderbo sborder = new SubOrderbo();
-    			ArrayList<SubOrder> dsOrder = sborder.getOrders(makh);
     			
+    			Orderbo od = new Orderbo();
+    			ArrayList<Order> dsOrder =  od.getOrder(makh);
+    			OrderDetailbo dtail = new OrderDetailbo();
+    			ArrayList<SubOrder> dsSubOrder = new ArrayList<SubOrder>();
     			Bookbo sbo = new Bookbo();		
+    			for(Order o:dsOrder) {
+    				ArrayList<OrderDetail> dsDetail =  dtail.getOrderDt(o.getMaHoaDon());
+    				Long tt = (long)0;
+    				for(OrderDetail e:dsDetail) {
+    					tt += e.getSoLuongMua() * sbo.getPrice(e.getMaSach());
+    				}
+    				Long MaHoaDon = o.getMaHoaDon();
+    				Long tongTien = tt;
+    				Timestamp ngayMua = o.getNgayMua();
+    				String hoten = auth.getHoten();
+    				String diachi = auth.getDiachi();
+    				String sodt = auth.getSdt();
+    				SubOrder sbor = new SubOrder(MaHoaDon,tongTien, ngayMua, hoten, diachi, sodt);
+    				dsSubOrder.add(sbor);
+    			}
+    			
+    			
         		Categorybo lbo = new Categorybo();		
         		
         		ArrayList<Bookbean> dsbook = sbo.getsach();
         		ArrayList<Categorybean> dscate = lbo.getloai();
         				
-        		req.setAttribute("dsOrder", dsOrder);
+        		req.setAttribute("dsOrder", dsSubOrder);
         		req.setAttribute("dsbook", dsbook);
         		req.setAttribute("dscate", dscate);
         		req.setAttribute("booknew", sbo.sachNew());

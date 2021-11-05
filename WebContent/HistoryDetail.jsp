@@ -21,7 +21,7 @@
 <html>
 
 <head>
-    <title>Lịch sử mua hàng</title>
+    <title>Chi tiết đơn hàng</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https:////maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
@@ -47,12 +47,17 @@
 <body>
 
     <%
-    	ArrayList<SubOrder> orders = (ArrayList<SubOrder>)request.getAttribute("dsOrder");
+    	ArrayList<GioHangbean> orders = (ArrayList<GioHangbean>)request.getAttribute("dsOrder");
         //SHĐ
         long shd = (orders!=null)?orders.size():0;
         	
         //Tổng tiền
         long tong = 0;
+        if(orders!=null) {
+        	for(GioHangbean i: orders){
+        		tong += i.getGia() * i.getSlmua();
+        	}
+        }            
         
         ArrayList<Categorybean> dscate = (ArrayList<Categorybean>)request.getAttribute("dscate");
         Bookbean booknew = (Bookbean)request.getAttribute("booknew");
@@ -102,56 +107,49 @@
                     <section class="pt-5 pb-5">
                         <div class="container">
                             <div style="margin-top: 10px">
-                                <h2 class="display-5 mb-2 text-center">LỊCH SỬ MUA HÀNG</h2>
+                                <h2 class="display-5 mb-2 text-center">CHI TIẾT ĐƠN HÀNG</h2>
                                 <p class="mb-5 text-center">
-                                    <i class="text-info font-weight-bold" id="sohd"><%=shd %></i> hoá đơn
+                                    <i class="text-info font-weight-bold" id="sohd"><%=shd %></i> sản phẩm
                                 </p>
                             </div>
-
+							<div class="d-flex py-3">
+                                    <h3 id="sumTien">Tổng tiền:
+                                        <%=NumberFormat.getNumberInstance(Locale.US).format(tong) %> VNĐ
+                                    </h3>                                    
+                            </div>
                             <div>                                
                                 <table class="table">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th width="5%" scope="col">STT</th>
-                                            <th width="20%" scope="col">Tổng tiền</th>
-                                            <th width="20%" scope="col">Ngày mua</th>
-                                            <th width="20%" scope="col">Họ tên</th>
-                                            <th width="20%" scope="col">Địa chỉ</th>
-                                            <th width="15%" scope="col">SĐT</th>
-                                            <th scope="col"></th>
+                                            <th width="25%" scope="col">Hình ảnh</th>
+                                            <th width="25%" scope="col">Tên sách</th>
+                                            <th width="25%" scope="col">Giá</th>
+                                            <th width="20%" scope="col">Số lượng</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%                                        
                                     if(orders!=null) {
                                     	int stt = 1;
-                                        for(SubOrder i: orders){
+                                        for(GioHangbean i: orders){
                                %>		
                                         <tr>                                       
                                         	<td scope="row">   
                                                  <%=stt %>                                        
                                             </td>
-                                            <td>
-                                                <%=NumberFormat.getNumberInstance(Locale.US).format(i.getTongTien())%>
+                                            <td scope="row">   
+                                                 <img class="img-fluid card-img-top" src="<%=i.getAnh()%>">                                    
                                             </td>
-                                            
                                             <td>
-                                                <%= i.getNgayMua()%></td>
+                                                <%= i.getTensach()%></td>
+                                            <td>                                            
                                             <td>
-                                            <td>
-                                                <%= i.getHoten() %></td>
-                                            <td> 
-                                            <td>
-                                                <%= i.getDiachi() %></td>
-                                            <td> 
-                                            <td>
-                                                <%= i.getSodt() %></td>
-                                            <td> 
-                                            <td>
-                                            <a href="historydetail?id=<%=i.getMaHoaDon()%>" target="_blank">
-											  <i class="fas fa-question-circle"></i>
-											</a>                                            
+                                                <%=NumberFormat.getNumberInstance(Locale.US).format(i.getGia())%>
                                             </td>
+                                            <td>
+                                                <%= i.getSlmua()%></td>
+                                            <td>
                                        </tr>                                      
                                         <%stt++;} %>
                                         <%} %>

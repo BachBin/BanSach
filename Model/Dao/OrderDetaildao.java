@@ -19,7 +19,7 @@ public class OrderDetaildao {
 			Connection con = new ConnecDataBase().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setLong(1, mahd);			
-			ResultSet rs = ps.executeQuery(sql);
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {				
 				Long maChiTietHD = rs.getLong(1);				
 				Long maSach = rs.getLong(2);

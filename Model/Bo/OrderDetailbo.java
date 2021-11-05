@@ -8,7 +8,7 @@ import Dao.OrderDetaildao;
 
 public class OrderDetailbo {
 	OrderDetaildao odao = new OrderDetaildao();
-	public ArrayList<OrderDetail> getOrder(Long mahd) throws Exception {
+	public ArrayList<OrderDetail> getOrderDt(Long mahd) throws Exception {
 		return odao.getOrderDetail(mahd);
 	}
 	public boolean createOrderDetail(OrderDetail od) throws Exception {
