@@ -182,8 +182,26 @@
                     scrollTop: 0
                 }, 500);
             });
-        });        
+        }); 
+        function addAjax(masach) {
+			$.ajax({
+				url: "/BanSach/addAjax",
+				type: "get",
+				data: {
+					masach: masach
+				},
+				success: function (data) {
+					var sizecart = document.getElementById("cartMenu");
+					sizecart.innerHTML = data;					
+					tata.success('Thành công', 'Đã thêm sách vào giỏ!');
+				},
+				error: function (xhr) {
+					location.reload();
+				}
+			});
+		}
     </script>
+    
     <jsp:include page="includes/Footer.jsp"></jsp:include>   	
 </body>
 
