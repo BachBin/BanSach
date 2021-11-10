@@ -118,14 +118,14 @@
                                     </h3>                                    
                             </div>
                             <div>                                
-                                <table class="table">
-                                    <thead class="thead-dark">
+                                <table class="table table-condensed table-responsive">
+                                    <thead>
                                         <tr>
                                             <th width="5%" scope="col">STT</th>
-                                            <th width="25%" scope="col">Hình ảnh</th>
-                                            <th width="25%" scope="col">Tên sách</th>
-                                            <th width="25%" scope="col">Giá</th>
-                                            <th width="20%" scope="col">Số lượng</th>                                            
+                                            <th width="30%" scope="col">Hình ảnh</th>
+                                            <th width="30%" scope="col">Tên sách</th>
+                                            <th width="20%" scope="col">Giá</th>
+                                            <th width="10%" scope="col">SL</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -138,18 +138,19 @@
                                         	<td scope="row">   
                                                  <%=stt %>                                        
                                             </td>
-                                            <td scope="row">   
+                                            
+                                            <td>   
                                                  <img class="img-fluid card-img-top" src="<%=i.getAnh()%>">                                    
                                             </td>
                                             <td>
-                                                <%= i.getTensach()%></td>
-                                            <td>                                            
+                                                <%= i.getTensach()%>
+                                            </td>                                                                                       
                                             <td>
                                                 <%=NumberFormat.getNumberInstance(Locale.US).format(i.getGia())%>
                                             </td>
                                             <td>
-                                                <%= i.getSlmua()%></td>
-                                            <td>
+                                                <%= i.getSlmua()%>
+                                            </td>                                            
                                        </tr>                                      
                                         <%stt++;} %>
                                         <%} %>

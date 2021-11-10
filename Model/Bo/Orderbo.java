@@ -10,7 +10,7 @@ public class Orderbo {
 	public ArrayList<Order> getOrder(Long makh) throws Exception {
 		return odao.getOrder(makh);
 	}
-	public Long createOrder(Order od) throws Exception {
-		return odao.createOrder(od);
+	public Long createOrder(Order od,String hoten,String diachi,String sdt) throws Exception {
+		return odao.createOrder(od, hoten, diachi, sdt);
 	}
 }

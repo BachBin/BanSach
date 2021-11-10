@@ -61,6 +61,13 @@
 	</script>		
 	
 	<%session.removeAttribute("successod");} %>
+	
+	<% if(session.getAttribute("alert")!=null) {%>
+	<script type="text/javascript">
+		tata.success('Thành công', "Cập nhật tài khoản thành công!");
+	</script>	
+	
+	<%session.removeAttribute("alert");} %>
 	<jsp:include page="includes/Menu.jsp" />
 
 	<div class="container">

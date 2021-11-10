@@ -109,16 +109,16 @@
                             </div>
 
                             <div>                                
-                                <table class="table">
-                                    <thead class="thead-dark">
+                                <table class="table table-condensed table-responsive">
+                                    <thead>
                                         <tr>
-                                            <th width="5%" scope="col">STT</th>
-                                            <th width="20%" scope="col">Tổng tiền</th>
-                                            <th width="20%" scope="col">Ngày mua</th>
-                                            <th width="20%" scope="col">Họ tên</th>
-                                            <th width="20%" scope="col">Địa chỉ</th>
-                                            <th width="15%" scope="col">SĐT</th>
-                                            <th scope="col"></th>
+                                            <th  style="width:5%">STT</th>
+                                            <th  style="width:20%">Tổng tiền</th>
+                                            <th style="width:20%">Ngày mua</th>
+                                            <th style="width:20%">Họ tên</th>
+                                            <th style="width:20%">Địa chỉ</th>
+                                            <th style="width:15%">SĐT</th>
+                                            <th style="width:5%"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -128,25 +128,30 @@
                                         for(SubOrder i: orders){
                                %>		
                                         <tr>                                       
-                                        	<td scope="row">   
+                                        	<td>   
                                                  <%=stt %>                                        
                                             </td>
+                                            
                                             <td>
                                                 <%=NumberFormat.getNumberInstance(Locale.US).format(i.getTongTien())%>
                                             </td>
                                             
                                             <td>
-                                                <%= i.getNgayMua()%></td>
+                                                <%= i.getNgayMua()%>
+                                            </td>
+                                           
                                             <td>
+                                                <%= i.getHoten() %>
+                                            </td>
+                                          
                                             <td>
-                                                <%= i.getHoten() %></td>
-                                            <td> 
+                                                <%= i.getDiachi() %>
+                                            </td>
+                                             
                                             <td>
-                                                <%= i.getDiachi() %></td>
-                                            <td> 
-                                            <td>
-                                                <%= i.getSodt() %></td>
-                                            <td> 
+                                                <%= i.getSodt() %>
+                                            </td>
+                                            
                                             <td>
                                             <a href="historydetail?id=<%=i.getMaHoaDon()%>" target="_blank">
 											  <i class="fas fa-question-circle"></i>

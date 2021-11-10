@@ -25,24 +25,35 @@ public class EditUser extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
-		req.setCharacterEncoding("utf-8");
-		resp.setCharacterEncoding("utf-8");		
-		HttpSession session = req.getSession();
-		Login user = (Login)session.getAttribute("auth");		
-		String id = req.getParameter("makh");
-		String mk = req.getParameter("matkhau");		
-		
-		if(user.getTendn().equals(id) && user.getMatkhau().equals(mk)) {
-			resp.sendRedirect("home");	
-		}
-		else {
-			Loginbo kbo = new Loginbo();
-			Login usernew = new Login(id, mk, user.isIsadmin());
-			if(kbo.updateLogin(usernew)) {
-				session.setAttribute("auth", usernew);
-				req.setAttribute("alert","Cập nhật tài khoản thành công!");
-				req.getRequestDispatcher("home").forward(req, resp);
-			}			
+		try {
+			req.setCharacterEncoding("utf-8");
+			resp.setCharacterEncoding("utf-8");		
+			HttpSession session = req.getSession();
+			Customerbean user = (Customerbean)session.getAttribute("auth");		
+			String id = req.getParameter("makh");
+			String mk = req.getParameter("matkhau");		
+			
+			if(user.getTendn().equals(id) && user.getMatkhau().equals(mk)) {
+				resp.sendRedirect("home");	
+			}
+			else {
+				Customerbo kbo = new Customerbo();
+				long ID = user.getId();
+				String hoten = user.getHoten();
+				String diachi = user.getDiachi();
+				String sdt = user.getSdt();
+				String email = user.getEmail();
+				String tendn = user.getTendn();
+				String matkhau = mk;
+				Customerbean usernew = new Customerbean(ID, hoten, diachi, sdt, email, tendn, matkhau);
+				if(kbo.updateCustomer(usernew)) {
+					session.setAttribute("auth", usernew);
+					session.setAttribute("alert", "Cập nhật tài khoản thành công!");
+					resp.sendRedirect("home");					
+				}			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		} 			
 	}
 }

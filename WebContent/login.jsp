@@ -164,28 +164,9 @@
 				}, 500);
 			});
 		});
-	</script>    
+	</script>
 	<jsp:include page="includes/Footer.jsp"></jsp:include>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-	</script>
-	<script src="js/dkdn.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-
-			$("#toggle").click(function () {				
-				if ($("#password").attr("type") == "password") {
-					//Change type attribute
-					$("#password").attr("type", "text");
-				} else {
-					//Change type attribute
-					$("#password").attr("type", "password");
-				}
-			});
-
-		});
-	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="js/tata.js"></script>
 	<script type="text/javascript">
 		function addAjax(masach) {
@@ -204,9 +185,7 @@
 					location.reload();
 				}
 			});
-		}		
-
-		
+		}
 	</script>
 </body>
 

@@ -55,9 +55,9 @@ public class History extends HttpServlet {
     				Long MaHoaDon = o.getMaHoaDon();
     				Long tongTien = tt;
     				Timestamp ngayMua = o.getNgayMua();
-    				String hoten = auth.getHoten();
-    				String diachi = auth.getDiachi();
-    				String sodt = auth.getSdt();
+    				String hoten = o.getHoten();
+    				String diachi = o.getDiachi();
+    				String sodt = o.getSdt();
     				SubOrder sbor = new SubOrder(MaHoaDon,tongTien, ngayMua, hoten, diachi, sodt);
     				dsSubOrder.add(sbor);
     			}

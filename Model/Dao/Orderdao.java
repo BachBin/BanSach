@@ -26,20 +26,26 @@ public class Orderdao {
 				Long maHoaDon = rs.getLong(1);
 				Long makh = rs.getLong(2);
 				Timestamp ngayMua = rs.getTimestamp(3);
-				boolean daMua = rs.getBoolean(4);
-				ds.add(new Order(maHoaDon, makh, ngayMua, daMua));
+				String hoten = rs.getString(4);
+				String diachi = rs.getString(5);
+				String sdt = rs.getString(6);
+				boolean daMua = rs.getBoolean(7);
+				ds.add(new Order(maHoaDon, makh, ngayMua, hoten, diachi, sdt, daMua));
 			}					
 			con.close();			
 			return ds;
 	}	
-	public Long createOrder(Order od) throws Exception { 		
-		sql = "insert into Orders(makh, NgayMua, DaMua) values(?,?,?)";	
+	public Long createOrder(Order od,String hoten,String diachi,String sdt) throws Exception { 		
+		sql = "insert into Orders(makh, NgayMua, HoTen, DiaChi, SDT,DaMua) values(?,?,?,?,?,?)";	
 		
 			Connection con = new ConnecDataBase().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			ps.setLong(1, od.getMakh());	
 			ps.setTimestamp(2, od.getNgayMua());	
-			ps.setBoolean(3, od.isDaMua());	
+			ps.setString(3, hoten);
+			ps.setString(4, diachi);
+			ps.setString(5, sdt);
+			ps.setBoolean(6, od.isDaMua());	
 			int affectedRows = ps.executeUpdate();
 			if (affectedRows == 0) {				 	
 	           return (long)-1;

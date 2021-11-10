@@ -28,8 +28,8 @@ public class HomeControl extends HttpServlet {
 		Categorybo lbo = new Categorybo();		
 		
 		ArrayList<Bookbean> dsbook = sbo.getsach();
-		ArrayList<Categorybean> dscate = lbo.getloai();	
-			
+		ArrayList<Categorybean> dscate = lbo.getloai();				
+		
 		request.setAttribute("dsbook", dsbook);
 		request.setAttribute("dscate", dscate);
 		request.setAttribute("booknew", sbo.sachNew());
