@@ -9,11 +9,13 @@ public class SubOrder {
 	private String hoten;
 	private String diachi;
 	private String sodt;
+	private boolean DaMua;
 	public SubOrder() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SubOrder(Long maHoaDon, Long tongTien, Timestamp ngayMua, String hoten, String diachi, String sodt) {
+	public SubOrder(Long maHoaDon, Long tongTien, Timestamp ngayMua, String hoten, String diachi, String sodt,
+			boolean daMua) {
 		super();
 		MaHoaDon = maHoaDon;
 		TongTien = tongTien;
@@ -21,6 +23,7 @@ public class SubOrder {
 		this.hoten = hoten;
 		this.diachi = diachi;
 		this.sodt = sodt;
+		DaMua = daMua;
 	}
 	public Long getMaHoaDon() {
 		return MaHoaDon;
@@ -57,5 +60,11 @@ public class SubOrder {
 	}
 	public void setSodt(String sodt) {
 		this.sodt = sodt;
+	}
+	public boolean isDaMua() {
+		return DaMua;
+	}
+	public void setDaMua(boolean daMua) {
+		DaMua = daMua;
 	}	
 }

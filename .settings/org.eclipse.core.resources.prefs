@@ -1,11 +1,15 @@
 eclipse.preferences.version=1
 encoding//Controller/Controller/AddUser.java=UTF-8
+encoding//Controller/Controller/CUCategories.java=UTF-8
+encoding//Controller/Controller/DCategories.java=UTF-8
 encoding//Controller/Controller/EditUser.java=UTF-8
 encoding//Controller/Controller/LoadCate.java=UTF-8
 encoding//Controller/Controller/LoginControl.java=UTF-8
 encoding//Controller/Controller/SearchAjax.java=UTF-8
+encoding//Controller/Controller/SearchCate.java=UTF-8
 encoding//Controller/Controller/SuccessOrder.java=UTF-8
 encoding//Controller/Controller/loadcategories.java=UTF-8
 encoding//Model/Dao/Bookdao.java=UTF-8
 encoding//Model/Dao/Categorydao.java=UTF-8
+encoding//WebContent/CUCategories.jsp=UTF-8
 encoding//WebContent/includes/Left.jsp=UTF-8

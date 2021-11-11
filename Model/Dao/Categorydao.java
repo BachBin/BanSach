@@ -35,4 +35,19 @@ public class Categorydao {
 			ps.setString(2, cate.getTenloai());				
 			return ps.executeUpdate() > 0;				
 	}
+	public boolean updateCate(Categorybean cate)  throws Exception {
+		sql = "update Category set tenloai = ? where maloai = ? ";		
+		Connection con = new ConnecDataBase().getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, cate.getTenloai());
+		ps.setString(2, cate.getMaloai());		
+		return ps.executeUpdate() > 0;		
+	}
+	public boolean deleteCate(String ml)  throws Exception {
+		sql = "delete from Category WHERE maloai = ?";		
+		Connection con = new ConnecDataBase().getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, ml);		
+		return ps.executeUpdate() > 0;		
+	}
 }

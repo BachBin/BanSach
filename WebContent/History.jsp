@@ -118,6 +118,7 @@
                                             <th style="width:20%">Họ tên</th>
                                             <th style="width:20%">Địa chỉ</th>
                                             <th style="width:15%">SĐT</th>
+                                            <th style="width:15%">Trạng thái</th>
                                             <th style="width:5%"></th>
                                         </tr>
                                     </thead>
@@ -152,6 +153,14 @@
                                                 <%= i.getSodt() %>
                                             </td>
                                             
+                                            <td>                
+                                            	<%if(i.isDaMua()==true){%>
+                                            		<i class="fas fa-check-circle" style="color: blue"></i>		
+                                            	<%} else {%>
+                                            		<i class="far fa-times-circle" style="color: red"></i>
+                                            	<%} %>
+                                            </td>
+                                                                                        
                                             <td>
                                             <a href="historydetail?id=<%=i.getMaHoaDon()%>" target="_blank">
 											  <i class="fas fa-question-circle"></i>

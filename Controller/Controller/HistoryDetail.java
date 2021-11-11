@@ -14,6 +14,7 @@ import Bean.Bookbean;
 import Bean.Categorybean;
 import Bean.GioHangbean;
 import Bean.OrderDetail;
+import Bean.OrderDetails;
 import Bo.Bookbo;
 import Bo.Categorybo;
 import Bo.GioHangbo;
@@ -34,7 +35,7 @@ public class HistoryDetail extends HttpServlet {
 		Bookbo sbo = new Bookbo();	
 		OrderDetailbo dtbo = new OrderDetailbo();
 		ArrayList<OrderDetail> dsdetail = dtbo.getOrderDt(mahd);
-		ArrayList<GioHangbean> dsOrderDetail = new ArrayList<GioHangbean>();
+		ArrayList<OrderDetails> dsOrderDetail = new ArrayList<OrderDetails>();
 		for(OrderDetail o:dsdetail) {
 			Long masach = o.getMaSach(); 
 			String tensach = sbo.getBookbyMaSach(o.getMaSach()).getTensach(); 
@@ -42,8 +43,9 @@ public class HistoryDetail extends HttpServlet {
 			String anh = sbo.getBookbyMaSach(o.getMaSach()).getAnh();
 			Long gia = sbo.getBookbyMaSach(o.getMaSach()).getGia();
 			int slmua = o.getSoLuongMua();
-			GioHangbean gh = new GioHangbean(masach, tensach, tacgia, anh, gia, slmua);
-			dsOrderDetail.add(gh);
+			boolean damua =o.isDaMua();
+			OrderDetails od = new OrderDetails(masach, tensach, tacgia, anh, gia, slmua,damua);
+			dsOrderDetail.add(od);
 		}
 		
 		

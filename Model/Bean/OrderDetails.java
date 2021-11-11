@@ -1,8 +1,6 @@
 package Bean;
 
-
-
-public class GioHangbean {
+public class OrderDetails {
 	private Long masach;
 	private String tensach;
 	private String tacgia;
@@ -10,12 +8,15 @@ public class GioHangbean {
 	private Long gia;
 	private int slmua;
 	private Long thanhtien;
-	public GioHangbean() {
+	private boolean DaMua;
+	
+
+	public OrderDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}	
 
-	public GioHangbean(Long masach, String tensach, String tacgia, String anh, Long gia, int slmua) {
+	public OrderDetails(Long masach, String tensach, String tacgia, String anh, Long gia, int slmua,boolean damua) {
 		super();
 		this.masach = masach;
 		this.tensach = tensach;
@@ -23,7 +24,8 @@ public class GioHangbean {
 		this.anh = anh;
 		this.gia = gia;
 		this.slmua = slmua;
-		this.thanhtien = gia * slmua;
+		this.DaMua = damua;
+		this.thanhtien = gia * slmua;		
 	}
 
 	public Long getMasach() {
@@ -77,5 +79,13 @@ public class GioHangbean {
 	public Long getThanhtien() {
 		return gia * slmua;
 	}
-		
+	
+	public boolean isDaMua() {
+		return DaMua;
+	}
+
+	public void setDaMua(boolean daMua) {
+		DaMua = daMua;
+	}
+	
 }

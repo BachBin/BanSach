@@ -55,9 +55,25 @@ public class LoginControl extends HttpServlet {
         			rd.forward(req, resp);    			
         		}
         		else if(lgbo.checkExists(tk)==false){
-        			req.setAttribute("mess", "Tài khoản không tồn tại!");
-        			RequestDispatcher rd = req.getRequestDispatcher("login");
-        			rd.forward(req, resp);
+        			Loginbo loginbo = new Loginbo();
+        			Login loginbean = loginbo.checkLogin(tk, mk);
+        			if(loginbean!=null) {
+        				HttpSession session = req.getSession();
+        				if(loginbean.isIsadmin()==true) {
+        					session.setAttribute("authadmin", loginbean);
+        					resp.sendRedirect("Admin.jsp");
+        				}        					
+        				else {
+        					session.setAttribute("authadmin", loginbean);
+        					resp.sendRedirect("Staff.jsp");
+        				}        					
+        			}
+        			else {
+        				req.setAttribute("mess", "Tài khoản không tồn tại!");
+        				RequestDispatcher rd = req.getRequestDispatcher("login");
+        				rd.forward(req, resp);
+        			}
+        			
         		}
         		else {
         			HttpSession session = req.getSession();

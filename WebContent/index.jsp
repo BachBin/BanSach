@@ -4,14 +4,14 @@
 <%@page import="Bean.Categorybean"%>
 <%@page import="Bean.Bookbean"%>
 <%@page import="java.util.Locale"%>
-<%@page import="java.text.NumberFormat"%>
 <%@page import="org.apache.tomcat.util.buf.UEncoder.SafeCharsSet"%>
 <%@page import="org.apache.tomcat.util.buf.UEncoder.SafeCharsSet"%>
 <%@page import="Bo.Customerbo"%>
 <%@page import="Bo.Categorybo"%>
 <%@page import="Bo.Bookbo"%>
 <%@page import="java.util.ArrayList"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -43,31 +43,24 @@
 </head>
 
 <body>
-
-	<%
-	     ArrayList<Bookbean> dsbook = (ArrayList<Bookbean>)request.getAttribute("dsbook");
-			
-			if(request.getAttribute("dsbooktk")!=null) 
-				dsbook = (ArrayList<Bookbean>)request.getAttribute("dsbooktk");
-			
-			String tk = request.getParameter("makh");
-			String mk = request.getParameter("matkhau");			
-			if(tk==null) tk = "";
-			if(mk==null) mk = "";			
-	%>		
-	<% if(session.getAttribute("successod")!=null) {%>
-	<script type="text/javascript">
-		tata.success('Thành công', 'Đặt hàng thành công, chúng tôi sẽ liên lạc sớm!');
-	</script>		
+	<c:if test = "${not empty dsbooktk}">
+		<c:set var="dsbook" value="${dsbooktk}" scope="request"/>		
+    </c:if>
+    
+    <c:if test="${not empty sessionScope.successod }">
+    	<script type="text/javascript">
+			tata.success('Thành công', 'Đặt hàng thành công, chúng tôi sẽ liên lạc sớm!');
+		</script>
+		<c:remove var="successod"/>
+    </c:if>    
 	
-	<%session.removeAttribute("successod");} %>
+	<c:if test="${not empty sessionScope.alert }">
+    	<script type="text/javascript">
+			tata.success('Thành công', "Cập nhật tài khoản thành công!");
+		</script>
+		<c:remove var="alert"/>
+    </c:if>     
 	
-	<% if(session.getAttribute("alert")!=null) {%>
-	<script type="text/javascript">
-		tata.success('Thành công', "Cập nhật tài khoản thành công!");
-	</script>	
-	
-	<%session.removeAttribute("alert");} %>
 	<jsp:include page="includes/Menu.jsp" />
 
 	<div class="container">
@@ -83,27 +76,27 @@
                     </div>                                      
                 </div>
 				<div id="content" class="row">
-					<%for(Bookbean s: dsbook){ %>
-					<div class="col-12 col-md-6 col-lg-4">
+					<c:forEach items="${dsbook }" var="s">
+						<div class="col-12 col-md-6 col-lg-4">
 						<div class="card">
-						<a href='detail?bookid=<%=s.getMasach() %>'	title="View Product">
-							<img class="card-img-top" style="height: 200px" src="<%=s.getAnh()%>" alt="Chưa có ảnh">
+						<a href='detail?bookid=${s.getMasach() }'	title="View Product">
+							<img class="card-img-top" style="height: 200px" src="${s.getAnh() }" alt="Chưa có ảnh">
 							<div class="card-body">
 								<h4 class="card-title show_txt">
-									<%=s.getTensach()%>
+									${s.getTensach() }
 								</h4>
-								<p class="card-text show_txt"><i class="fas fa-at"></i> Tác giả: <%=s.getTacgia() %></p>
+								<p class="card-text show_txt"><i class="fas fa-at"></i> Tác giả: ${s.getTacgia() }</p>
 								<div class="row">
 									<div class="col" style="cursor: default;">
 										<p disabled class="btn btn-outline-secondary btn-block"
-											style="cursor: default;">Số lượng: <%=s.getSoluong()%></p>
+											style="cursor: default;">Số lượng: ${s.getSoluong() }</p>
 									</div>
 									<div class="col">
 										<p disabled class="btn btn-outline-dark btn-block" style="cursor: default;">
-											<%=NumberFormat.getNumberInstance(Locale.US).format(s.getGia())%> VNĐ</p>
+											<fmt:formatNumber value = "${s.getGia()}" type = "currency"/> VNĐ</p>
 									</div>
 									<div class="col">
-										<a href="javascript:return false;" onclick="addAjax('<%=s.getMasach() %>')"
+										<a href="javascript:return false;" onclick="addAjax('${s.getMasach()}')"
 											class="btn btn-success btn-block"><i class="fas fa-cart-plus"></i> Thêm
 											giỏ</a>
 									</div>
@@ -111,8 +104,8 @@
 							</div>
 							</a>
 						</div>
-					</div>
-					<%} %>
+					</div>	
+					</c:forEach>					
 				</div>					
 			</div>
 		</div>

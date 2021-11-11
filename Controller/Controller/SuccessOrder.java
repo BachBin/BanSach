@@ -53,14 +53,14 @@ public class SuccessOrder extends HttpServlet {
 				Date date = new Date();		
 				Timestamp datecreate = new Timestamp(date.getTime());
 				Orderbo odbo = new Orderbo();
-				Order od = new Order((long)-1,auth.getId(),datecreate,hoten,diachi,sdt,true);
+				Order od = new Order((long)-1,auth.getId(),datecreate,hoten,diachi,sdt,false);
 				Long idOrder = odbo.createOrder(od,hoten,diachi,sdt);
 				if(idOrder > 0) {								
 					if(order!=null && order.Size()>0) {
 						if(order!=null) { 
 							OrderDetailbo dtbo = new OrderDetailbo();
 		            		for(GioHangbean i: order.ds){            						
-		            			OrderDetail dt = new OrderDetail((long)-1, i.getMasach(), i.getSlmua(), idOrder, true);
+		            			OrderDetail dt = new OrderDetail((long)-1, i.getMasach(), i.getSlmua(), idOrder, false);
 		            			dtbo.createOrderDetail(dt);
 		            		}
 						}

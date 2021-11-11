@@ -1,3 +1,4 @@
+<%@page import="Bean.OrderDetails"%>
 <%@page import="Bean.SubOrder"%>
 <%@page import="Bean.Order"%>
 <%@page import="Bo.GioHangbo"%>
@@ -47,14 +48,14 @@
 <body>
 
     <%
-    	ArrayList<GioHangbean> orders = (ArrayList<GioHangbean>)request.getAttribute("dsOrder");
+    	ArrayList<OrderDetails> orders = (ArrayList<OrderDetails>)request.getAttribute("dsOrder");
         //SHĐ
         long shd = (orders!=null)?orders.size():0;
         	
         //Tổng tiền
         long tong = 0;
         if(orders!=null) {
-        	for(GioHangbean i: orders){
+        	for(OrderDetails i: orders){
         		tong += i.getGia() * i.getSlmua();
         	}
         }            
@@ -125,14 +126,15 @@
                                             <th width="30%" scope="col">Hình ảnh</th>
                                             <th width="30%" scope="col">Tên sách</th>
                                             <th width="20%" scope="col">Giá</th>
-                                            <th width="10%" scope="col">SL</th>                                            
+                                            <th width="5%" scope="col">SL</th>     
+                                           	<th width="20%" scope="col">Trạng thái</th>                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%                                        
                                     if(orders!=null) {
                                     	int stt = 1;
-                                        for(GioHangbean i: orders){
+                                        for(OrderDetails i: orders){
                                %>		
                                         <tr>                                       
                                         	<td scope="row">   
@@ -150,7 +152,14 @@
                                             </td>
                                             <td>
                                                 <%= i.getSlmua()%>
-                                            </td>                                            
+                                            </td> 
+                                        	<td>                
+                                            	<%if(i.isDaMua()==true){%>
+                                            		<i class="fas fa-check-circle" style="color: blue"></i>		
+                                            	<%} else {%>
+                                            		<i class="far fa-times-circle" style="color: red"></i>
+                                            	<%} %>
+                                            </td>                                               
                                        </tr>                                      
                                         <%stt++;} %>
                                         <%} %>
