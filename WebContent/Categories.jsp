@@ -102,7 +102,7 @@
 			            <th width="50px"></th>
 			        </tr>
 			        </thead>
-			        <tbody class="categories" id="content">
+			        <tbody>
 			        	<c:set var = "stt"  value = "${1}"/>
 			        	<c:forEach items="${dscate }" var="ct">
 			        		<tr>

@@ -93,7 +93,7 @@
 									</div>
 									<div class="col">
 										<p disabled class="btn btn-outline-dark btn-block" style="cursor: default;">
-											<fmt:formatNumber value = "${s.getGia()}" type = "currency"/> VNĐ</p>
+											<fmt:formatNumber value="${s.getGia() }" pattern="###,###,###" /> VNĐ</p>
 									</div>
 									<div class="col">
 										<a href="javascript:return false;" onclick="addAjax('${s.getMasach()}')"

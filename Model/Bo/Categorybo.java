@@ -12,6 +12,13 @@ public class Categorybo {
 	public ArrayList<Categorybean> getloai() throws Exception {
 		return ldao.getloai();
 	}
+	public String getTenLoai(String ml) throws Exception {
+		for(Categorybean c:getloai()) {
+			if(c.getMaloai().equals(ml))
+				return c.getTenloai();
+		}
+		return null;
+	}
 	public ArrayList<Categorybean> Tim(String key) throws Exception {
 		ArrayList<Categorybean> ds = getloai();
 		ArrayList<Categorybean> tam = new ArrayList<Categorybean>();
