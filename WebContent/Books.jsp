@@ -94,10 +94,10 @@
 			                    <td>${cate.getTenLoai(s.getMaloai()) }</td>
 			                    <td>${s.getNgaynhap() }</td>
 			                    <td>
-			                        <a href="#"><button class="btn btn-warning">Sửa</button></a>
+			                        <a href="CUBooks.jsp?id=${s.getMasach() }"><button class="btn btn-warning">Sửa</button></a>
 			                    </td>
 			                    <td>
-			                        <a href="#" onclick="return confirm('Bạn có thực sự muốn xoá?')" class="btn btn-danger">Xoá</a>
+			                        <a href="delbook?id=${s.getMasach() }" onclick="return confirm('Bạn có thực sự muốn xoá?')" class="btn btn-danger">Xoá</a>
 			                    </td>                            
 			            	</tr> 
 			            	<c:set var = "stt"  value = "${stt+1}"/>  

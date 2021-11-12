@@ -61,11 +61,11 @@ public class LoginControl extends HttpServlet {
         				HttpSession session = req.getSession();
         				if(loginbean.isIsadmin()==true) {
         					session.setAttribute("authadmin", loginbean);
-        					resp.sendRedirect("Admin.jsp");
+        					resp.sendRedirect("qlloaisach");
         				}        					
         				else {
         					session.setAttribute("authadmin", loginbean);
-        					resp.sendRedirect("Staff.jsp");
+        					resp.sendRedirect("qlloaisach");
         				}        					
         			}
         			else {

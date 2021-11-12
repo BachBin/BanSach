@@ -1,6 +1,7 @@
 package Bean;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
@@ -12,14 +13,14 @@ public class Bookbean {
 	private String maloai;
 	private Long sotap;
 	private String anh;
-	private Date ngaynhap;
+	private Timestamp ngaynhap;
 	private String tacgia;
 	public Bookbean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Bookbean(Long masach, String tensach, Long soluong, Long gia, String maloai, Long sotap, String anh,
-			Date ngaynhap, String tacgia) {
+			Timestamp ngaynhap, String tacgia) {
 		super();
 		this.masach = masach;
 		this.tensach = tensach;
@@ -73,10 +74,10 @@ public class Bookbean {
 	public void setAnh(String anh) {
 		this.anh = anh;
 	}
-	public Date getNgaynhap() {
+	public Timestamp getNgaynhap() {
 		return ngaynhap;
 	}
-	public void setNgaynhap(Date ngaynhap) {
+	public void setNgaynhap(Timestamp ngaynhap) {
 		this.ngaynhap = ngaynhap;
 	}
 	public String getTacgia() {

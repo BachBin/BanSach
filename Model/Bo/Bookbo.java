@@ -12,6 +12,15 @@ public class Bookbo {
 	public ArrayList<Bookbean> getsach() throws Exception {
 		return sdao.getsach();
 	}
+	public boolean createBook(Bookbean book)  throws Exception {
+		return sdao.createBook(book);
+	}
+	public boolean updateBook(Bookbean book)  throws Exception {
+		return sdao.updateBook(book);
+	}
+	public boolean deleteBook(Long ms)  throws Exception {
+		return sdao.deleteBook(ms);
+	}
 	public Long getPrice(Long masach) throws Exception {
 		for(Bookbean s:getsach()) {
 			if(s.getMasach() == masach) 
@@ -40,7 +49,7 @@ public class Bookbo {
 	}
 	public Bookbean getBookbyMaSach(Long masach) throws Exception {
 		for(Bookbean e:getsach()) {
-			if(e.getMasach()==masach)
+			if(e.getMasach().equals(masach))
 				return e;
 		}
 		return null;
@@ -50,5 +59,5 @@ public class Bookbo {
 	}	
 	public int getTotal() throws Exception {
 		return sdao.getTotalBook();
-	}
+	}	
 }
