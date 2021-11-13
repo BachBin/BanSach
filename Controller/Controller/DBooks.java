@@ -35,7 +35,7 @@ public class DBooks extends HttpServlet {
 				}
 				else {
 					HttpSession session = req.getSession();
-					session.setAttribute("errorx", "Xoá loại thất bại!");
+					session.setAttribute("errorx", "Xoá sách thất bại!");
 					resp.sendRedirect("qlsach");
 				}
 			}

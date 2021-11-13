@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -27,8 +28,8 @@ import Bo.Bookbo;
 /**
  * Servlet implementation class AddBooks
  */
-@WebServlet("/addbooks")
-public class AddBooks extends HttpServlet {
+@WebServlet("/cubooks")
+public class CUBooks extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     @Override
@@ -98,37 +99,39 @@ public class AddBooks extends HttpServlet {
 					}
 				}
 				if(id!=null && !id.equals("")) {
-					if(name!=null && !name.equals("")&&
-							sl!=null  && !sl.equals("")&&
-							gia!=null && !gia.equals("") &&
-							tacgia!=null && !tacgia.equals("") &&
-							loai!=null && !loai.equals("") &&
-							sotap!=null && !sotap.equals("") &&
-							ngaynhap!=null && !ngaynhap.equals("") &&
-							anh!=null  && !anh.equals("")
-						)
-						{							
-							try {
-								DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
-							    DateFormat outputformat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-								
-							    Date date = (Date)formatter.parse(ngaynhap);
-							    String dateout = outputformat.format(date);
-							    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-							    Date parsedDate = dateFormat.parse(dateout);
-							    Timestamp tsNgayNhap = new java.sql.Timestamp(parsedDate.getTime());	
-							    Bookbo sb = new Bookbo();	
-								Bookbean bookupdate = new Bookbean(Long.valueOf(id), name, Long.parseLong(sl), Long.parseLong(gia), loai, Long.parseLong(sotap), anh, tsNgayNhap, tacgia);
-								if(sb.updateBook(bookupdate)) {
-									resp.sendRedirect("qlsach");
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}							
+					try {
+						Bookbo sb = new Bookbo();
+						Bookbean bookupdate = sb.getBookbyMaSach(Long.valueOf(id));
+						if(!name.equals("")&&name!=null) bookupdate.setTensach(name);
+						if(!sl.equals("")&&sl!=null) bookupdate.setSoluong(Long.parseLong(sl));
+						if(!gia.equals("")&&gia!=null) bookupdate.setGia(Long.parseLong(gia));
+						if(!loai.equals("")&&loai!=null) bookupdate.setMaloai(loai);
+						if(!sotap.equals("")&&sotap!=null) bookupdate.setSotap(Long.parseLong(sotap));
+						if(!anh.equals("")&&anh!=null) bookupdate.setAnh(anh);
+						if(!tacgia.equals("")&&tacgia!=null) bookupdate.setTacgia(tacgia);
+						if(!ngaynhap.equals("")&&ngaynhap!=null) {
+							DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+						    DateFormat outputformat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+							
+						    Date date = (Date)formatter.parse(ngaynhap);
+						    String dateout = outputformat.format(date);
+						    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+						    Date parsedDate = dateFormat.parse(dateout);
+						    Timestamp tsNgayNhap = new java.sql.Timestamp(parsedDate.getTime());
+						    bookupdate.setNgaynhap(tsNgayNhap);							
 						}
-						else {
+						if(sb.updateBook(bookupdate)) {
+							HttpSession session = req.getSession();
+							session.setAttribute("alert1", "Sửa sách thành công!");
+							resp.sendRedirect("qlsach");
+						}
+						else 
 							resp.sendRedirect("CUBooks.jsp");
-						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}				
+					
 				}
 				else {
 					if(name!=null && !name.equals("")&&
@@ -154,6 +157,8 @@ public class AddBooks extends HttpServlet {
 							    Bookbo sb = new Bookbo();	
 								Bookbean bookadd = new Bookbean((long)-1, name, Long.parseLong(sl), Long.parseLong(gia), loai, Long.parseLong(sotap), anh, tsNgayNhap, tacgia);
 								if(sb.createBook(bookadd)) {
+									HttpSession session = req.getSession();
+									session.setAttribute("alert2", "Thêm sách thành công!");
 									resp.sendRedirect("qlsach");
 								}
 							} catch (Exception e) {

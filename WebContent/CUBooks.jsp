@@ -53,7 +53,7 @@
         </div>
         <jsp:useBean id="book" class="Bo.Bookbo" scope="request"></jsp:useBean>
         <div class="panel-body">
-            <form method="post" action="addbooks" enctype= "multipart/form-data">            
+            <form method="post" action="cubooks" enctype= "multipart/form-data">            
                 <div class="form-group">
                     <label for="name">Tên Loại Sách:</label>
                     <input type="text" name="id" value="${not empty param.id?param.id:''  }" hidden="true">

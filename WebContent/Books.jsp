@@ -17,7 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  
+    <script src="js/tata.js"></script> 
 </head>
 <body>
 <ul class="nav nav-tabs">
@@ -39,8 +40,31 @@
         <a class="nav-link" href="logoutadmin">Đăng Xuất </a>
     </li>   
 </ul>
-
-<div class="container">
+	<c:if test="${not empty sessionScope.alert1 }">
+		<script type="text/javascript">
+			tata.success('Thành công', 'Sửa sách thành công!');
+		</script>
+		<c:remove var="alert1" />
+	</c:if>
+	<c:if test="${not empty sessionScope.alert2 }">
+		<script type="text/javascript">
+			tata.success('Thành công', 'Thêm sách thành công!');
+		</script>
+		<c:remove var="alert2" />
+	</c:if>
+	<c:if test="${not empty sessionScope.alertx }">
+		<script type="text/javascript">
+			tata.success('Thành công', 'Xoá sách thành công!');
+		</script>
+		<c:remove var="alertx" />
+	</c:if>
+	<c:if test="${not empty sessionScope.errorx }">
+		<script type="text/javascript">
+			tata.error('Thất bại', 'Xoá sách thất bại!');
+		</script>
+		<c:remove var="errorx" />
+	</c:if>
+	<div class="container">
     <div class="panel panel-primary">        
 		<div class="panel-heading">
             <h2 class="text-center" style="margin-top: 10px">Quản Lý Sách</h2> 
