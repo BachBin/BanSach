@@ -1,9 +1,12 @@
 eclipse.preferences.version=1
+encoding//Controller/Controller/AcceptOrder.java=UTF-8
 encoding//Controller/Controller/AddUser.java=UTF-8
 encoding//Controller/Controller/CUBooks.java=UTF-8
 encoding//Controller/Controller/CUCategories.java=UTF-8
 encoding//Controller/Controller/DBooks.java=UTF-8
 encoding//Controller/Controller/DCategories.java=UTF-8
+encoding//Controller/Controller/DOrderDetail.java=UTF-8
+encoding//Controller/Controller/DOrders.java=UTF-8
 encoding//Controller/Controller/EditUser.java=UTF-8
 encoding//Controller/Controller/LoadCate.java=UTF-8
 encoding//Controller/Controller/LoginControl.java=UTF-8

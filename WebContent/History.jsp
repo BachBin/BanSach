@@ -155,7 +155,7 @@
                                             
                                             <td>                
                                             	<%if(i.isDaMua()==true){%>
-                                            		<i class="fas fa-check-circle" style="color: blue"></i>		
+                                            		<i class="fas fa-check-circle" style="color: green"></i>		
                                             	<%} else {%>
                                             		<i class="far fa-times-circle" style="color: red"></i>
                                             	<%} %>

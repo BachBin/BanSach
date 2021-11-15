@@ -18,6 +18,9 @@ public class Bookbo {
 	public boolean updateBook(Bookbean book)  throws Exception {
 		return sdao.updateBook(book);
 	}
+	public boolean updateSLBook(Long ms, Long quantity)  throws Exception {
+		return sdao.updateSLBook(ms, quantity);
+	}	
 	public boolean deleteBook(Long ms)  throws Exception {
 		return sdao.deleteBook(ms);
 	}

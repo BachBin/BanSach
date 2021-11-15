@@ -100,6 +100,15 @@ public class Bookdao {
 		
 		return ps.executeUpdate() > 0;		
 	}
+	public boolean updateSLBook(Long ms, Long quantity)  throws Exception {
+		sql = "update Book set soluong = ? where masach = ?";		
+		Connection con = new ConnecDataBase().getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, quantity);
+		ps.setLong(2, ms);	
+		
+		return ps.executeUpdate() > 0;		
+	}
 	public boolean deleteBook(Long ms)  throws Exception {
 		sql = "delete from Book WHERE masach = ?";		
 		Connection con = new ConnecDataBase().getConnection();

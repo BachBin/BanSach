@@ -44,7 +44,7 @@ public class HistoryDetail extends HttpServlet {
 			Long gia = sbo.getBookbyMaSach(o.getMaSach()).getGia();
 			int slmua = o.getSoLuongMua();
 			boolean damua =o.isDaMua();
-			OrderDetails od = new OrderDetails(masach, tensach, tacgia, anh, gia, slmua,damua);
+			OrderDetails od = new OrderDetails(o.getMaChiTietHD(),masach, tensach, tacgia, anh, gia, slmua,damua);
 			dsOrderDetail.add(od);
 		}
 		

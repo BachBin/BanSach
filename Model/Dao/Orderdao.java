@@ -15,6 +15,25 @@ import Connection.ConnecDataBase;
 
 public class Orderdao {
 	String sql;	
+	public ArrayList<Order> getAllOrder() throws Exception { 
+		ArrayList<Order> ds = new ArrayList<Order>();
+		sql = "select * from Orders";		
+			Connection con = new ConnecDataBase().getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {				
+				Long maHoaDon = rs.getLong(1);
+				Long makh = rs.getLong(2);
+				Timestamp ngayMua = rs.getTimestamp(3);
+				String hoten = rs.getString(4);
+				String diachi = rs.getString(5);
+				String sdt = rs.getString(6);
+				boolean daMua = rs.getBoolean(7);
+				ds.add(new Order(maHoaDon, makh, ngayMua, hoten, diachi, sdt, daMua));
+			}					
+			con.close();			
+			return ds;
+	}
 	public ArrayList<Order> getOrder(Long MaKH) throws Exception { 
 		ArrayList<Order> ds = new ArrayList<Order>();
 		sql = "select * from Orders where makh = ?";		
@@ -58,6 +77,21 @@ public class Orderdao {
 	                return (long)-2;
 	            }
 	        }
+	}
+	public boolean deleteOrder(Long mo)  throws Exception {
+		sql = "delete from Orders WHERE MaHoaDon = ?";		
+		Connection con = new ConnecDataBase().getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, mo);		
+		return ps.executeUpdate() > 0;		
+	} 
+	public boolean updateStatus(Long id,String status)  throws Exception {
+		sql = "update Orders set DaMua = ? where MaHoaDon = ?";		
+		Connection con = new ConnecDataBase().getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, status);
+		ps.setLong(2, id);		
+		return ps.executeUpdate() > 0;		
 	}
 	
 }

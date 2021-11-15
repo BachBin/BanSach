@@ -17,8 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>   
-    <script src="js/tata.js"></script>	
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  
+    <script src="js/tata.js"></script>	 
 </head>
 <body>
 <ul class="nav nav-tabs">
@@ -42,25 +42,50 @@
 </ul>
 	<c:if test="${not empty sessionScope.alertx }">
 		<script type="text/javascript">
-			tata.success('Thành công', 'Xoá đơn hàng thành công!');
+			tata.success('Thành công', 'Xoá chi tiết đơn hàng thành công!');
 		</script>
 		<c:remove var="alertx" />
 	</c:if>
 	<c:if test="${not empty sessionScope.errorx }">
 		<script type="text/javascript">
-			tata.error('Thất bại', 'Xoá đơn hàng thất bại!');
+			tata.error('Thất bại', 'Xoá chi tiết đơn hàng thất bại!');
 		</script>
 		<c:remove var="errorx" />
 	</c:if>
+	<c:if test="${not empty sessionScope.alertx1 }">
+		<script type="text/javascript">
+			tata.success('Thành công', 'Xác nhận chi tiết đơn hàng thành công!');
+		</script>
+		<c:remove var="alertx1" />
+	</c:if>
+	<c:if test="${not empty sessionScope.errorx1 }">
+		<script type="text/javascript">
+			tata.error('Thất bại', 'Xác nhận chi tiết đơn hàng thất bại!');
+		</script>
+		<c:remove var="errorx1" />
+	</c:if>
+	<c:if test="${not empty sessionScope.errorx2 }">
+		<script type="text/javascript">
+			tata.error('Thất bại', 'Số lượng không đủ, đã cập nhật đơn hàng!');
+		</script>
+		<c:remove var="errorx2" />
+	</c:if>
+	<c:if test="${not empty sessionScope.errorx3 }">
+		<script type="text/javascript">
+			tata.error('Thất bại', 'Không thể cập nhật đơn hàng!');
+		</script>
+		<c:remove var="errorx3" />
+	</c:if>	
+	
 	<div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="text-center" style="margin-top: 10px">Quản Lý Hoá Đơn</h2>  
+            <h2 class="text-center" style="margin-top: 10px">Chi Tiết Hoá Đơn</h2>  
             <div class="panel-body">
 			    <div class="row d-flex justify-content-end" style="margin-bottom: 10px;">			        
 			        <div>
 			            <div class="form-inline active-pink-4">
-			            	<form action="searchorder" method="get">
+			            	<form action="searchcate" method="get">
 			            	<input name="search" class="form-control search form-control-sm mr-3 w-75" type="text" value="${param.search }" placeholder="Tìm kiếm..." aria-label="Search">
 			                <i class="fas fa-search" aria-hidden="true"></i>	
 			            	</form>			                
@@ -70,29 +95,28 @@
 			
 			    <table class="table table-bordered table-hover">
 			        <thead>
-			        <tr>
-			            <th  style="width:5%">STT</th>
-                        <th  style="width:20%">Tổng tiền</th>
-                       	<th style="width:20%">Ngày mua</th>
-                       	<th style="width:20%">Họ tên</th>
-                    	<th style="width:20%">Địa chỉ</th>
-                   		<th style="width:15%">SĐT</th>
-                    	<th style="width:15%">Trạng thái</th>
-                    	<th style="width:5%"></th>
-                    	<th style="width:5%"></th>                    	
+			        <tr>			            
+                        <th width="5%" scope="col">STT</th>
+                        <th width="10%" scope="col">Hình ảnh</th>
+                        <th width="30%" scope="col">Tên sách</th>
+                        <th width="20%" scope="col">Giá</th>
+                        <th width="5%" scope="col">SL</th>     
+                        <th width="5%" scope="col">Trạng thái</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
 			        </tr>
 			        </thead>
 			        <tbody>
 			        	<c:set var = "stt"  value = "${1}"/>
 			        	<c:forEach items="${dsOrder }" var="ct">
 			        		<tr>
-			                    <td>${stt }</td>
-			                    
-			                    <td><fmt:formatNumber value="${ct.getTongTien() }" pattern="###,###,###" /></td>
-			                    <td>${ct.getNgayMua() }</td>
-			                    <td>${ct.getHoten() }</td>
-			                    <td>${ct.getDiachi() }</td>
-			                    <td>${ct.getSodt() }</td>
+			                    <td>${stt }</td>			                    
+			                    <td>
+			                    	<img style="width: 70px; height: 70px;" class="img-fluid card-img-top" src="${ct.getAnh() }">
+			                    </td>
+			                    <td>${ct.getTensach() }</td>
+			                    <td><fmt:formatNumber value="${ct.getGia() }" pattern="###,###,###" /></td>
+			                    <td>${ct.getSlmua() }</td>
 			                    <td>
 			                    <c:choose>
 			                    	<c:when test="${ct.isDaMua()==true }">
@@ -101,12 +125,14 @@
 			                    	<c:otherwise>
 			                    		<i class="far fa-times-circle" style="color: red"></i>
 			                    	</c:otherwise>
-			                    </c:choose>			                  
-			                    </td>
-			                    <td><a href="orderdetail?id=${ct.getMaHoaDon() }" target="_blank"><button class="btn btn-primary">Xem</button></a></td>			                    
+			                    </c:choose>
+			                    </td>	
 			                    <td>
-			                        <a href="deleteorder?id=${ct.getMaHoaDon() }" onclick="return confirm('Bạn có thực sự muốn xoá?')" class="btn btn-danger">Xoá</a>
-			                    </td> 			                                               
+			                    <a href="deletedetail?id=${ct.getMaChiTietHD() }&ido=${param.id}" onclick="return confirm('Bạn có thực sự muốn xoá?')"><button class="btn btn-danger">Xoá</button></a>
+			                    </td>	
+			                    <td>
+			                    <a href="accept?id=${ct.getMaChiTietHD() }&ido=${param.id}"><button class="btn btn-success">Xác nhận</button></a>
+			                    </td>	                                              
 			            	</tr> 
 			            	<c:set var = "stt"  value = "${stt+1}"/>  
 			        	</c:forEach>			                 

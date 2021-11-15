@@ -1,6 +1,7 @@
 package Bean;
 
 public class OrderDetails {
+	private Long MaChiTietHD;
 	private Long masach;
 	private String tensach;
 	private String tacgia;
@@ -16,8 +17,9 @@ public class OrderDetails {
 		// TODO Auto-generated constructor stub
 	}	
 
-	public OrderDetails(Long masach, String tensach, String tacgia, String anh, Long gia, int slmua,boolean damua) {
+	public OrderDetails(Long machitiethd, Long masach, String tensach, String tacgia, String anh, Long gia, int slmua,boolean damua) {
 		super();
+		this.MaChiTietHD = machitiethd;
 		this.masach = masach;
 		this.tensach = tensach;
 		this.tacgia = tacgia;
@@ -26,6 +28,14 @@ public class OrderDetails {
 		this.slmua = slmua;
 		this.DaMua = damua;
 		this.thanhtien = gia * slmua;		
+	}
+
+	public Long getMaChiTietHD() {
+		return MaChiTietHD;
+	}
+
+	public void setMaChiTietHD(Long maChiTietHD) {
+		MaChiTietHD = maChiTietHD;
 	}
 
 	public Long getMasach() {
