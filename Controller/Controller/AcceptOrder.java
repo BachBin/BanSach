@@ -59,33 +59,14 @@ public class AcceptOrder extends HttpServlet {
     						resp.sendRedirect("orderdetail?id="+ido);
      	 				}     	 				
      	 			}
-     	 			else {     	 				
-     	 				if(slkho > 0) {     	 					
-     	 					OrderDetail od1 = new OrderDetail((long)-1, oddt.getMaSach(), slkho.intValue(), oddt.getMaHoaDon(), true);
-     	 					odbo.createOrderDetail(od1);
-     	 					odbo.updateQuantity(Long.parseLong(id), oddt.getSoLuongMua() - slkho);
-     	 					odbo.updateStatus(Long.parseLong(id), "False");
-     	 					if(sbo.updateSLBook(oddt.getMaSach(), (long)0)) {
-         	 					ArrayList<OrderDetail> dsod = odbo.getOrderDt(Long.parseLong(ido));
-         	 					boolean co = true;
-         	 					for(OrderDetail o:dsod) {     	 						
-         	 						if(o.isDaMua()==false)
-         	 						{
-         	 							co = false;
-         	 							break;
-         	 						}
-         	 					}
-         	 					if(co==true) {
-         	 						Orderbo obo = new Orderbo();
-         	 						obo.updateStatus(Long.parseLong(ido), "True");
-         	 					}      	 					
-         	 					HttpSession session = req.getSession();
-     	 						session.setAttribute("alertx1", "Xác nhận chi tiết đơn hàng thành công!");					
-        						resp.sendRedirect("orderdetail?id="+ido);
-         	 				}      	 						
-     	 					
-     	 				}
-     	 				else {     
+     	 			else {      	
+     	 				long slu = (slkho - (long)oddt.getSoLuongMua() > 0)?slkho - (long)oddt.getSoLuongMua():0;
+     	 				if(slkho > 0 && oddt.getSoLuongMua() - slkho > 0) {     	 					
+     	 					OrderDetail odtupdate = new  OrderDetail((long)-1, oddt.getMaSach(), slkho.intValue(), oddt.getMaHoaDon(), true);
+     	 					odbo.createOrderDetail(odtupdate);
+     	 					odbo.updateQuantity(oddt.getMaChiTietHD(), oddt.getSoLuongMua() - slkho);
+     	 					odbo.updateStatus(oddt.getMaChiTietHD(), "False");
+     	 					sbo.updateSLBook(oddt.getMaSach(), slu);
      	 					ArrayList<OrderDetail> dsod = odbo.getOrderDt(Long.parseLong(ido));
      	 					boolean co = true;
      	 					for(OrderDetail o:dsod) {     	 						
@@ -98,14 +79,36 @@ public class AcceptOrder extends HttpServlet {
      	 					if(co==true) {
      	 						Orderbo obo = new Orderbo();
      	 						obo.updateStatus(Long.parseLong(ido), "True");
-     	 					}      
+     	 					}      	 					
+     	 					HttpSession session = req.getSession();
+ 	 						session.setAttribute("errorx1", "Cập nhật đơn hàng, số lượng trong kho không đủ!");					
+    						resp.sendRedirect("orderdetail?id="+ido);
+     	 				}
+     	 				else {      	 					
+     	 					odbo.updateStatus(oddt.getMaChiTietHD(), "True");
+     	 					ArrayList<OrderDetail> dsod = odbo.getOrderDt(Long.parseLong(ido));
+     	 					sbo.updateSLBook(oddt.getMaSach(), slu);
+     	 					boolean co = true;
+     	 					for(OrderDetail o:dsod) {     	 						
+     	 						if(o.isDaMua()==false)
+     	 						{
+     	 							co = false;
+     	 							break;
+     	 						}
+     	 					}
+     	 					if(co==true) {
+     	 						Orderbo obo = new Orderbo();
+     	 						obo.updateStatus(Long.parseLong(ido), "True");
+     	 					}      	 					
+     	 					HttpSession session = req.getSession();
+ 	 						session.setAttribute("errorx2", "Xác nhận chi tiết đơn hàng thất bại, số lượng trong kho không đủ!");					
     						resp.sendRedirect("orderdetail?id="+ido);
      	 				}
      	 			}     	 			
      	 		}
      	 		else {
      	 			HttpSession session = req.getSession();
-					session.setAttribute("errorx1", "Xác nhận chi tiết đơn hàng thất bại!");					
+					session.setAttribute("errorx", "Xác nhận chi tiết đơn hàng thất bại!");					
 					resp.sendRedirect("orderdetail?id="+ido);
      	 		}
      	 	}    		

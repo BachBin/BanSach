@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quản Lý Hoá Đơn</title>
+    <title>Chi Tiết Hoá Đơn</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -29,7 +29,7 @@
         <a class="nav-link" href="qlsach">Quản Lý Sách</a>
     </li>    
     <li class="nav-item">
-        <a class="nav-link active" href="qlhoadon">Quản Lý Hoá Đơn</a>
+        <a class="nav-link" href="qlhoadon">Quản Lý Hoá Đơn</a>
     </li>  
     <c:if test="${sessionScope.authadmin.isIsadmin()=='true' }">
 	    <li class="nav-item">
@@ -60,22 +60,16 @@
 	</c:if>
 	<c:if test="${not empty sessionScope.errorx1 }">
 		<script type="text/javascript">
-			tata.error('Thất bại', 'Xác nhận chi tiết đơn hàng thất bại!');
+			tata.error('Thất bại', 'Cập nhật đơn hàng, số lượng trong kho không đủ!');
 		</script>
 		<c:remove var="errorx1" />
 	</c:if>
 	<c:if test="${not empty sessionScope.errorx2 }">
 		<script type="text/javascript">
-			tata.error('Thất bại', 'Số lượng không đủ, đã cập nhật đơn hàng!');
+			tata.error('Thất bại', 'Xác nhận chi tiết đơn hàng thất bại, số lượng trong kho không đủ!');
 		</script>
 		<c:remove var="errorx2" />
 	</c:if>
-	<c:if test="${not empty sessionScope.errorx3 }">
-		<script type="text/javascript">
-			tata.error('Thất bại', 'Không thể cập nhật đơn hàng!');
-		</script>
-		<c:remove var="errorx3" />
-	</c:if>	
 	
 	<div class="container">
     <div class="panel panel-primary">
