@@ -52,6 +52,18 @@
 		</script>
 		<c:remove var="error2" />
 	</c:if>
+	<c:if test="${not empty sessionScope.alertx }">
+		<script type="text/javascript">
+			tata.success('Thành công', 'Xoá tài khoản thành công!');
+		</script>
+		<c:remove var="alertx" />
+	</c:if>
+	<c:if test="${not empty sessionScope.errorx }">
+		<script type="text/javascript">
+			tata.error('Thất bại', 'Xoá tài khoản thất bại!');
+		</script>
+		<c:remove var="errorx" />
+	</c:if>
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link" href="qlloaisach">Quản
 				Lý Loại Sách</a></li>

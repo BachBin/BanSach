@@ -60,13 +60,13 @@
 	</c:if>
 	<c:if test="${not empty sessionScope.errorx1 }">
 		<script type="text/javascript">
-			tata.error('Thất bại', 'Cập nhật đơn hàng, số lượng trong kho không đủ!');
+			tata.success('Thành công', 'Cập nhật đơn hàng, số lượng trong kho chưa đủ!');
 		</script>
 		<c:remove var="errorx1" />
 	</c:if>
 	<c:if test="${not empty sessionScope.errorx2 }">
 		<script type="text/javascript">
-			tata.error('Thất bại', 'Xác nhận chi tiết đơn hàng thất bại, số lượng trong kho không đủ!');
+			tata.error('Thất bại', 'Số lượng trong kho không đủ!');
 		</script>
 		<c:remove var="errorx2" />
 	</c:if>
