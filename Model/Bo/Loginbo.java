@@ -10,6 +10,12 @@ public class Loginbo {
 	public ArrayList<Login> getlogin(){
 		return lg.getLogin();
 	}
+	public Login getInfor(String tendn){
+		for(Login lg:getlogin())
+			if(lg.getTendn().equals(tendn))
+				return lg;
+		return null;
+	}
 	public Login checkLogin(String tendn, String matkhau) {
 		for(Login e:getlogin()) {
 			if(e.getTendn().equals(tendn) && e.getMatkhau().equals(matkhau))
@@ -24,6 +30,11 @@ public class Loginbo {
 	}
 	public boolean updateLogin(Login user) {
 		if(lg.updateLogin(user))
+			return true;
+		return false;
+	}
+	public boolean deleteLogin(String tendn) {
+		if(lg.deleteLogin(tendn))
 			return true;
 		return false;
 	}
@@ -42,5 +53,5 @@ public class Loginbo {
 				return true;
 		}
 		return false;
-	}
+	}	
 }

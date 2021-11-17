@@ -13,7 +13,7 @@ public class Logindao {
 	String sql;	
 	public ArrayList<Login> getLogin(){
 		ArrayList<Login> ds = new ArrayList<Login>();
-		sql = "select * from DangNhap";
+		sql = "select * from Login";
 		try {
 			Connection con = new ConnecDataBase().getConnection();
 			Statement st = con.createStatement();
@@ -29,7 +29,7 @@ public class Logindao {
 		return ds;
 	}
 	public boolean createLogin(Login user) {
-		sql = "insert into DangNhap(TenDangNhap,MatKhau,Quyen) values(?,?,?)";
+		sql = "insert into Login(TenDangNhap,MatKhau,Quyen) values(?,?,?)";
 		try {
 			Connection con = new ConnecDataBase().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -44,13 +44,27 @@ public class Logindao {
 		return false;
 	}
 	public boolean updateLogin(Login user) {
-		sql = "update DangNhap set MatKhau = ?, Quyen = ? where TenDangNhap = ?";
+		sql = "update Login set MatKhau = ?, Quyen = ? where TenDangNhap = ?";
 		try {
 			Connection con = new ConnecDataBase().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user.getMatkhau());
 			ps.setBoolean(2, user.isIsadmin());
 			ps.setString(3, user.getTendn());	
+			
+			return ps.executeUpdate() > 0;			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean deleteLogin(String tendn) {
+		sql = "delete from Login where TenDangNhap = ?";
+		try {
+			Connection con = new ConnecDataBase().getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, tendn);			
 			
 			return ps.executeUpdate() > 0;			
 			
